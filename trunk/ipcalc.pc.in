@@ -8,4 +8,4 @@ Name: libipcalc@COMPAT_VERSION@
 Description: IP calculating and subnetting
 Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -l@PACKAGE_NAME@@COMPAT_VERSION@
-Cflags: @CFLAGS@
+Cflags: ${defs} -I${includedir} @CFLAGS@
