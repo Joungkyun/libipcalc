@@ -1,0 +1,20 @@
+$Id: README,v 1.1.1.1 2010-08-07 16:27:49 oops Exp $
+
+libipcalc - IP Calculating and subnetting
+
+Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
+LICENSE: LGPL
+
+This library is forked in libkrisp.
+
+
+Quick Install
+
+./configure --prefix=/path
+make
+make install
+
+For preinstall, use DESTDIR environment as follows:
+
+	make DESTDIR=/path install
+
