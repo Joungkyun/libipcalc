@@ -1,11 +1,11 @@
 # Process this file with autoconf to produce a configure script.
 # Configure template for ipcalc library
 #
-# $Id: configure.ac,v 1.2 2010-11-04 09:34:59 oops Exp $
+# $Id: configure.ac,v 1.3 2010-11-04 10:01:14 oops Exp $
 
 #
 AC_PREREQ(2.59)
-AC_INIT([ipcalc], [1.0.1], [http://oops.org])
+AC_INIT([ipcalc], [1.0.0], [http://oops.org])
 AC_CONFIG_SRCDIR([ipcalc.h])
 AC_CONFIG_HEADER([ipcalc-config.h])
 AC_PREFIX_DEFAULT([/usr/local])
@@ -35,10 +35,10 @@ AC_PROG_LIBTOOL
 AC_ARG_WITH(compat,
 [  --with-compat=VERSION   build compat library])
 
-AC_PATH_PROG(MAKE, make)
-if test ! -f "$ac_cv_path_MAKE"; then
-	AC_MSG_ERROR(Can't not found make)
-fi
+#AC_PATH_PROG(MAKE, make)
+#if test ! -f "$ac_cv_path_MAKE"; then
+#	AC_MSG_ERROR(Can't not found make)
+#fi
 
 AC_PATH_PROG(PERL, perl)
 if test ! -f "$ac_cv_path_PERL"; then
@@ -107,6 +107,8 @@ AC_SUBST(PC_DEFS)
 AC_C_CONST
 AC_TYPE_SIZE_T
 AC_HEADER_TIME
+
+AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ulong type exists in C.])])
 
 # Checks for library functions.
 AC_FUNC_MALLOC
