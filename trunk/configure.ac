@@ -1,11 +1,11 @@
 # Process this file with autoconf to produce a configure script.
 # Configure template for ipcalc library
 #
-# $Id: configure.ac,v 1.1.1.1 2010-08-07 16:27:49 oops Exp $
+# $Id: configure.ac,v 1.2 2010-11-04 09:34:59 oops Exp $
 
 #
 AC_PREREQ(2.59)
-AC_INIT([ipcalc], [1.0.0], [http://oops.org])
+AC_INIT([ipcalc], [1.0.1], [http://oops.org])
 AC_CONFIG_SRCDIR([ipcalc.h])
 AC_CONFIG_HEADER([ipcalc-config.h])
 AC_PREFIX_DEFAULT([/usr/local])

@@ -1,5 +1,5 @@
 /*
- * $Id: ipcalc.h,v 1.2 2010-08-07 17:10:13 oops Exp $
+ * $Id: ipcalc.h,v 1.3 2010-11-04 09:34:59 oops Exp $
  */
 #ifndef IPCALC_H
 #define IPCALC_H
@@ -28,8 +28,8 @@
 #   endif
 #endif
 
-#define IPCALC_VERSION "1.0.0"
-#define IPCALC_UVERSION "100000000"
+#define IPCALC_VERSION "1.0.1-dev"
+#define IPCALC_UVERSION "001000001-dev"
 
 /*
  * check valid ip
