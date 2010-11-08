@@ -125,7 +125,9 @@
  */
 
 #if ! defined C_ULONG_DEFINED
-	typedef	unsigned long	ulong;
+#	if ! defined ulong
+		typedef	unsigned long	ulong;
+#	endif
 #endif
 
 #endif /* IPCALC_CONFIG_H */
