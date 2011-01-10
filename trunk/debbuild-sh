@@ -59,7 +59,7 @@ $CMD
 cd debian
 cp -af changelog.debbuild changelog
 cd -
-debian/rule clean
+debian/rules clean
 #make distclean
 
 exit 0
