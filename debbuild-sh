@@ -60,6 +60,6 @@ cd debian
 cp -af changelog.debbuild changelog
 cd -
 debian/rule clean
-make distclean
+#make distclean
 
 exit 0
