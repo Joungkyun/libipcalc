@@ -1,27 +1,26 @@
-.TH PREFIX2LONG 3 "22 May 2010"
+.TH PREFIX2LONG 3 "10 Jan 2011"
 
-.SH 이름
+.SH NAME
 .BI prefix2long
-\- 네트워크 prefix를 unsigned long 형으로 변환
+\- Converts network prefix to long mask.
 
-.SH 사용법
+.SH SYNOPSIS
 .BI "#include <ipcalc.h>"
 .br
 .BI "ulong prefix2long (char * " prefix ");"
 
-.SH 설명
+.SH DESCRIPTION
 .BI prefix2long
-API는 10진수 네트워크 prefix를 unsigned long 형으로 변환을 한다.
+api converts network prefix to long mask.
 
-.SH 반환값
+.SH "RETURN VALUE"
 .PP
-성공시에
+If success, returns
 .BI "unsigned long"
-값을 반환하며, 실패시에
+format value, and  on fails, returns
 .BI 0
-을 반환한다.
 
-.SH 예제
+.SH EXAMPLE
 .nf
 #include <ipcalc.h>
 
@@ -36,18 +35,17 @@ int main (void) {
 }
 .fi
 
-.SH 저자
-김정균
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
 
-.SH 버그 리포트
-<http://oops.org> 의 QnA 게시판을 이용한다.
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
 
-.SH 저작권
-Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
 
-이 API는 
-.BI LGPL
-을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.
+This api is follows
+.BI LGPL 2.1
 
-.SH 참조
+.SH SEE ALSO
 guess_netmask(3), long2prefix(3)

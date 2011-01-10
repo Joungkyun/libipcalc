@@ -1,24 +1,24 @@
-.TH BROADCAST 3 "08 Jun 2010"
+.TH BROADCAST 3 "10 Jan 2011"
 
-.SH 이름
-broadcast \- IP와 network mask를 이용하여 broadcast address를 반환
+.SH NAME
+broadcast \- returns broadcast address with IP and network mask
 
-.SH 사용법
+.SH SYNOPSIS
 .BI "#include <ipcalc.h>"
 .br
 .BI "char * broadcast (ulong " ip ", ulong " mask ");"
 
-.SH 설명
+.SH DESCRIPTION
 .BI broadcast
-API는 IP 주소와 network mask를 이용하여 IP가 포함된 subnet의 broadcast address를 반환한다.
+.BI boradcast
+API returns broadcast address of subnet using with ip address and network mask
 
-.SH 반환값
-.PP
-unsigned long 형식의 IP 주소 반환하며, 실패시에
+.SH "RETURN VALUE"
+.BI "unsigned long"
+format value, and  on fails, returns
 .BI 0
-을 반환한다.
 
-.SH 예제
+.SH EXAMPLE
 .nf
 #include <ipcalc.h>
 
@@ -34,18 +34,17 @@ int main (void) {
 }
 .fi
 
-.SH 저자
-김정균 <http://oops.org>
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
 
-.SH 버그 리포트
-<http://oops.org> 의 QnA 게시판을 이용한다.
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
 
-.SH 저작권
-Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
 
-이 API는 
-.BI LGPL
-을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.
+This api is follows
+.BI LGPL 2.1
 
-.SH 참조
+.SH SEE ALSO
 guess_netmask(3), network(3)
