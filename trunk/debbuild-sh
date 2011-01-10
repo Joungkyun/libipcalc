@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CMD='dpkg-buildpackage -rfakeroot'
+CMD='dpkg-buildpackage -rfakeroot -b'
 PROG="libipcalc"
 
 usage() {
