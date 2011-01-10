@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # Configure template for ipcalc library
 #
-# $Id: configure.ac,v 1.3 2010-11-04 10:01:14 oops Exp $
+# $Id: configure.ac,v 1.4 2011-01-10 08:06:51 oops Exp $
 
 #
 AC_PREREQ(2.59)
@@ -114,5 +114,5 @@ AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ul
 AC_FUNC_MALLOC
 AC_FUNC_STAT
 
-AC_CONFIG_FILES([Makefile ipcalc.pc ipcalc-config])
+AC_CONFIG_FILES([Makefile ipcalc.pc ipcalc-config libipcalc.spec])
 AC_OUTPUT
