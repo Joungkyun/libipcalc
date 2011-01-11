@@ -8,6 +8,24 @@ usage() {
 	exit 1
 }
 
+do_patch() {
+	echo "* Apply debian patches"
+	plist=debian/patches/*.patch
+	for i in $plist
+	do
+		patch -p1 < $i
+	done;
+}
+
+do_unpatch() {
+	echo "* Apply debian unpatches"
+	plist=debian/patches/*.patch
+	for i in $plist
+	do
+		patch -suRf -p1 < $i
+	done
+}
+
 graceful_stop() {
 	echo "**** graceful stop ****"
 	pwd | grep 'debian$'
@@ -52,7 +70,9 @@ cp -af changelog changelog.debbuild
 perl -pi -e "s/\) stable; /\) ${distname}; /g" changelog
 cd -
 
+do_patch
 $CMD
+do_unpatch
 
 [ $? -ne 0 ] && graceful_stop
 
