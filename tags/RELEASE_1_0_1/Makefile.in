@@ -1,0 +1,133 @@
+# $Id: Makefile.in,v 1.6 2011-01-11 06:00:40 oops Exp $
+srcdir          = @srcdir@
+top_srcdir      = @top_srcdir@
+builddir        = @builddir@
+top_builddir    = .
+
+build           = @build@
+build_cpu       = @build_cpu@
+build_vendor    = @build_vendor@
+build_os        = @build_os@
+host            = @host@
+host_cpu        = @host_cpu@
+host_vendor     = @host_vendor@
+
+PROG            = @PACKAGE_NAME@
+VERSION         = @PACKAGE_VERSION@
+COMPAT          = @COMPAT_VERSION@
+CC              = @CC@ -Wall
+CFLAGS          = @CFLAGS@
+CPPFLAGS        = -I. @CPPFLAGS@
+LIBS            = @LIBS@
+LDFLAGS         = @LDFLAGS@ $(LIBS)
+DEFS            = @DEFS@ $(CPPFLAGS)
+
+OBJECT          = ipcalc.lo
+UTIL_OBJ        = ip2long.lo netcalc.lo
+HEADER_NAME     = ipcalc
+
+SONAME_MAJOR    = @SONAME_MAJOR@
+SONAME_MINOR    = @SONAME_MINOR@
+SONAME_REVISION = @SONAME_REVISION@
+SONAME_INFO     = @SONAME_INFO@
+SONAME_VERSION  = @SONAME_VERSION@
+
+prefix          = @prefix@
+exec_prefix     = @exec_prefix@
+datadir         = @datadir@
+includedir      = @includedir@
+libdir          = @libdir@
+bindir          = @bindir@
+mandir          = @mandir@
+DESTDIR         =
+
+LIBTOOL         = @LIBTOOL@
+INSTALL         = @INSTALL@
+RM              = @RM@ -f
+
+MKDIR           = @MKDIR@ -p
+STRIP           = @STRIP@
+LN              = @LN_S@
+MV              = @MV@
+PERL            = @PERL@
+
+CC_OPT          = $(CC) $(CFLAGS) $(DEFS)
+LINK            = $(LIBTOOL) --mode=link $(CC_OPT) -rpath $(libdir) -version-info $(SONAME_INFO)
+PLINK           = $(LIBTOOL) --mode=link $(CC_OPT) -rpath $(libdir)
+COMPILE         = $(LIBTOOL) --mode=compile $(CC_OPT) -prefer-pic
+P_LIBTOOL       = $(LIBTOOL) --mode=install @INSTALL_PROGRAM@ -m755
+D_LIBTOOL       = $(LIBTOOL) --mode=install @INSTALL_DATA@ -m644
+L_LIBTOOL       = $(LIBTOOL) --mode=install $(INSTALL)
+
+MANLANG         = ko
+
+
+all: $(OBJECT) $(UTIL_OBJ)
+	$(MAKE) libs
+	$(PLINK) -o ip2long ip2long.lo lib$(PROG)$(COMPAT).la
+	$(PLINK) -o netcalc netcalc.lo lib$(PROG)$(COMPAT).la
+
+ipcalc.lo: ipcalc.c ipcalc.h
+	$(COMPILE) -o $@ -c $<
+
+ip2long.lo: ip2long.c ipcalc.h util.h
+	$(COMPILE) -o $@ -c $<
+
+netcalc.lo: netcalc.c ipcalc.h util.h
+	$(COMPILE) -o $@ -c $<
+
+libs:
+	$(PERL) -pi -e 's!/\*[\s]+(#[\s]*undef )IPCALC_(PACKAGE_[A-Z]+)[\s]+\*/!	$$1$$2!g' $(PROG)-config.h
+	$(LINK) -o lib$(PROG)$(COMPAT).la $(OBJECT) $(LDFLAGS)
+
+install: install-header install-man
+	$(MKDIR) $(DESTDIR)$(bindir)
+	$(MKDIR) $(DESTDIR)$(libdir)/pkgconfig
+	$(P_LIBTOOL) $(PROG)-config $(DESTDIR)$(bindir)/$(PROG)$(COMPAT)-config
+	$(P_LIBTOOL) ip2long $(DESTDIR)$(bindir)/ip2long$(COMPAT)
+	$(P_LIBTOOL) netcalc $(DESTDIR)$(bindir)/netcalc$(COMPAT)
+	$(L_LIBTOOL) lib$(PROG)$(COMPAT).la $(DESTDIR)$(libdir)/lib$(PROG)$(COMPAT).la
+	$(D_LIBTOOL) $(PROG).pc $(DESTDIR)$(libdir)/pkgconfig/$(PROG)$(COMPAT).pc
+	$(LIBTOOL) --finish $(libdir)
+
+install-man:
+ifndef COMPAT
+	$(MKDIR) $(DESTDIR)$(mandir)/ko/man1
+	$(MKDIR) $(DESTDIR)$(mandir)/ko/man3
+
+	# install english man page
+	for manno in 1 3; do \
+		$(MKDIR) $(DESTDIR)$(mandir)/man$$manno; \
+		for i in `ls man/*.$$manno`; do \
+			$(D_LIBTOOL) $$i $(DESTDIR)$(mandir)/man$$manno/ ; \
+		done; \
+	done
+
+	# support languages
+	for l in $(MANLANG); do \
+		for manno in 1 3; do \
+			$(MKDIR) $(DESTDIR)$(mandir)/$$l/man$$manno; \
+			for i in `ls man/$$l/*.$$manno`; do \
+				$(D_LIBTOOL) $$i $(DESTDIR)$(mandir)/$$l/man$$manno/ ; \
+			done; \
+		done; \
+	done
+endif
+
+install-header:
+	$(MKDIR) $(DESTDIR)$(includedir)
+	for i in $(HEADER_NAME); do \
+		$(D_LIBTOOL) $$i.h $(DESTDIR)$(includedir)/$${i}$(COMPAT).h ; \
+	done
+
+clean:
+	-$(RM) -r *.o *.lo* *.la* .libs ip2long netcalc
+
+distclean: clean
+	for i in `ls *.in`; \
+	do \
+		rmfiles=`echo $$i | sed 's/\.in$$//g'`; \
+		$(RM) -r $$rmfiles; \
+	done
+	-$(RM) -r $(PROG)-config libtool config.log config.status
+	-$(RM) -r $(PROG)-config.h *~

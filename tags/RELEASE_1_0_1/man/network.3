@@ -1,0 +1,52 @@
+.TH NETWORK 3 "10 Jan 2011"
+
+.SH NAME
+network \- Retuns network address for ip address and network mask.
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "char * network (ulong " ip ", ulong " mask ");"
+
+.SH DESCRIPTION
+.BI network
+api retuns network address that is caculated by given ip
+address and network mask.
+
+.SH "RETURN VALUE"
+.PP
+If success, returns
+.BI "unsigned long"
+format value, and  on fails, returns
+.BI 0
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    char * ip = "192.168.10.131";
+    char * mask = "255.255.255.192";
+    ulong r;
+
+    r = network (ip2long (ip), ip2long (mask));
+    printf ("NETWORK ADDRESS: %s\n", long2ip (r));
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
+
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1
+
+.SH SEE ALSO
+guess_netmask(3), broadcast(3)
