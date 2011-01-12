@@ -1,13 +1,15 @@
---- libipcalc-1.0.1.orig/Makefile.in.orig	2011-01-11 15:00:40.000000000 +0900
-+++ libipcalc-1.0.1/Makefile.in	2011-01-11 16:02:53.695398904 +0900
-@@ -64,8 +64,8 @@ MANLANG         = ko
- 
- all: $(OBJECT) $(UTIL_OBJ)
- 	$(MAKE) libs
--	$(PLINK) -o ip2long ip2long.lo lib$(PROG)$(COMPAT).la
--	$(PLINK) -o netcalc netcalc.lo lib$(PROG)$(COMPAT).la
-+	$(CC_OPT) -o ip2long ip2long.o -L.libs -l$(PROG)$(COMPAT)
-+	$(CC_OPT) -o netcalc netcalc.o -L.libs -l$(PROG)$(COMPAT)
- 
- ipcalc.lo: ipcalc.c ipcalc.h
- 	$(COMPILE) -o $@ -c $<
+diff -urNp libipcalc.org//Makefile.in libipcalc/Makefile.in
+--- libipcalc.org//Makefile.in	2011-01-11 20:01:59.265399004 +0900
++++ libipcalc/Makefile.in	2011-01-12 21:06:25.465398990 +0900
+@@ -83,6 +83,11 @@ libs:
+ install: install-header install-man
+ 	$(MKDIR) $(DESTDIR)$(bindir)
+ 	$(MKDIR) $(DESTDIR)$(libdir)/pkgconfig
++
++	for i in .libs/lib$(PROG)$(COMPAT).so.$(SONAME_VERSION) .libs/ip2long .libs/netcalc; do \
++		/usr/bin/chrpath -d $$i; \
++	done
++
+ 	$(P_LIBTOOL) $(PROG)-config $(DESTDIR)$(bindir)/$(PROG)$(COMPAT)-config
+ 	$(P_LIBTOOL) ip2long $(DESTDIR)$(bindir)/ip2long$(COMPAT)
+ 	$(P_LIBTOOL) netcalc $(DESTDIR)$(bindir)/netcalc$(COMPAT)
