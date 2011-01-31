@@ -21,10 +21,10 @@ Description: Header and object files for development using libipcalc
  The libipcalc-dev package contains the header and object
  files necessary for developing programs
 
-Package: ipcalc
+Package: ipcalc-utils
 Section: utils
 Architecture: i386 amd64
 Depends: ${shlibs:Depends}, libipcalc1
 Description: IP calculating and subnetting utility
- libipcalc-utils package contains two utilities for calculating
- and subnetting IP address.
+ ipcalc-utils package contains two utilities for calculating (netcal)
+ and subnetting IP address (ip2long).
