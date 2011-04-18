@@ -4,6 +4,8 @@
 #ifndef IPCALC_H
 #define IPCALC_H
 
+#include <sys/types.h>
+
 /*
  * check valid ip
  */

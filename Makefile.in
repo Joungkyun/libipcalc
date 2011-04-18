@@ -255,7 +255,7 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 #m4/ipcalc@COMPAT_VERSION@.m4:
 #	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
 #endif
-SUBDIRS = . utils scripts man
+SUBDIRS = . utils test scripts man
 AM_CFLAGS = -Wall
 AM_LDFLAGS = -version-info $(SONAME_INFO)
 include_HEADERS = ipcalc.h
