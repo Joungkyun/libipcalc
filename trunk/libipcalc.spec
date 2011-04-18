@@ -78,6 +78,6 @@ and subnetting IP address.
 %{!?compat:%{_mandir}/ko/man1/*.1*}
 
 %changelog
-* Sun Aug 08 2010 JoungKyun.Kim <http://oops.org> %{epoch}:%{version}-%{release}
-- release %{version}-%{release}
+* @PACKAGE_DATE@ JoungKyun.Kim <http://oops.org> @PACKAGE_VERSION@-1
+- release @PACKAGE_VERSION@
 

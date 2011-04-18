@@ -6,6 +6,7 @@
 #   include <ipcalc-config.h>
 #endif
 
+#include <common.h>
 #include <ipcalc.h>
 
 #ifdef HAVE_GETOPT_H
