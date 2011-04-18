@@ -36,7 +36,7 @@
 
 
 
-SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) $(ip2long_SOURCES) $(netcalc_SOURCES)
+SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) $(ip2long@COMPAT_VERSION@_SOURCES) $(netcalc@COMPAT_VERSION@_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -60,8 +60,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@COMPAT_FALSE@bin_PROGRAMS = ip2long$(EXEEXT) netcalc$(EXEEXT) \
-@COMPAT_FALSE@	netcalc$(EXEEXT)
+bin_PROGRAMS = ip2long@COMPAT_VERSION@$(EXEEXT) \
+	netcalc@COMPAT_VERSION@$(EXEEXT)
 DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
 	$(include_HEADERS) $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/ipcalc-config.h.in \
@@ -97,14 +97,14 @@ libipcalc@COMPAT_VERSION@_la_OBJECTS =  \
 	$(am_libipcalc@COMPAT_VERSION@_la_OBJECTS)
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am__ip2long_SOURCES_DIST = ip2long.c
-@COMPAT_FALSE@am_ip2long_OBJECTS = ip2long.$(OBJEXT)
-ip2long_OBJECTS = $(am_ip2long_OBJECTS)
-@COMPAT_FALSE@ip2long_DEPENDENCIES = libipcalc.la
-am__netcalc_SOURCES_DIST = netcalc.c
-@COMPAT_FALSE@am_netcalc_OBJECTS = netcalc.$(OBJEXT)
-netcalc_OBJECTS = $(am_netcalc_OBJECTS)
-@COMPAT_FALSE@netcalc_DEPENDENCIES = libipcalc.la
+am_ip2long@COMPAT_VERSION@_OBJECTS = ip2long.$(OBJEXT)
+ip2long@COMPAT_VERSION@_OBJECTS =  \
+	$(am_ip2long@COMPAT_VERSION@_OBJECTS)
+ip2long@COMPAT_VERSION@_DEPENDENCIES = libipcalc@COMPAT_VERSION@.la
+am_netcalc@COMPAT_VERSION@_OBJECTS = netcalc.$(OBJEXT)
+netcalc@COMPAT_VERSION@_OBJECTS =  \
+	$(am_netcalc@COMPAT_VERSION@_OBJECTS)
+netcalc@COMPAT_VERSION@_DEPENDENCIES = libipcalc@COMPAT_VERSION@.la
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
 depcomp =
 am__depfiles_maybe =
@@ -116,10 +116,12 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) $(ip2long_SOURCES) \
-	$(netcalc_SOURCES)
+SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) \
+	$(ip2long@COMPAT_VERSION@_SOURCES) \
+	$(netcalc@COMPAT_VERSION@_SOURCES)
 DIST_SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) \
-	$(am__ip2long_SOURCES_DIST) $(am__netcalc_SOURCES_DIST)
+	$(ip2long@COMPAT_VERSION@_SOURCES) \
+	$(netcalc@COMPAT_VERSION@_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-exec-recursive install-info-recursive \
@@ -277,10 +279,10 @@ noinst_HEADERS = util.h common.h
 lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
 libipcalc@COMPAT_VERSION@_la_LDFLAGS = -version-info $(SONAME_INFO)
-@COMPAT_FALSE@ip2long_SOURCES = ip2long.c
-@COMPAT_FALSE@ip2long_LDADD = libipcalc.la
-@COMPAT_FALSE@netcalc_SOURCES = netcalc.c
-@COMPAT_FALSE@netcalc_LDADD = libipcalc.la
+ip2long@COMPAT_VERSION@_SOURCES = ip2long.c
+ip2long@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
+netcalc@COMPAT_VERSION@_SOURCES = netcalc.c
+netcalc@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
 all: ipcalc-config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -393,12 +395,12 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-ip2long$(EXEEXT): $(ip2long_OBJECTS) $(ip2long_DEPENDENCIES) 
-	@rm -f ip2long$(EXEEXT)
-	$(LINK) $(ip2long_LDFLAGS) $(ip2long_OBJECTS) $(ip2long_LDADD) $(LIBS)
-netcalc$(EXEEXT): $(netcalc_OBJECTS) $(netcalc_DEPENDENCIES) 
-	@rm -f netcalc$(EXEEXT)
-	$(LINK) $(netcalc_LDFLAGS) $(netcalc_OBJECTS) $(netcalc_LDADD) $(LIBS)
+ip2long@COMPAT_VERSION@$(EXEEXT): $(ip2long@COMPAT_VERSION@_OBJECTS) $(ip2long@COMPAT_VERSION@_DEPENDENCIES) 
+	@rm -f ip2long@COMPAT_VERSION@$(EXEEXT)
+	$(LINK) $(ip2long@COMPAT_VERSION@_LDFLAGS) $(ip2long@COMPAT_VERSION@_OBJECTS) $(ip2long@COMPAT_VERSION@_LDADD) $(LIBS)
+netcalc@COMPAT_VERSION@$(EXEEXT): $(netcalc@COMPAT_VERSION@_OBJECTS) $(netcalc@COMPAT_VERSION@_DEPENDENCIES) 
+	@rm -f netcalc@COMPAT_VERSION@$(EXEEXT)
+	$(LINK) $(netcalc@COMPAT_VERSION@_LDFLAGS) $(netcalc@COMPAT_VERSION@_OBJECTS) $(netcalc@COMPAT_VERSION@_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
