@@ -80,5 +80,6 @@ AC_CONFIG_FILES([
 	scripts/Makefile
 	scripts/ipcalc.pc
 	scripts/ipcalc-config
+	utils/Makefile
 ])
 AC_OUTPUT

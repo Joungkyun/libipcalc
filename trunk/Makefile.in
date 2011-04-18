@@ -35,8 +35,7 @@
 
 
 
-
-SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) $(ip2long@COMPAT_VERSION@_SOURCES) $(netcalc@COMPAT_VERSION@_SOURCES)
+SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -60,8 +59,6 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ip2long@COMPAT_VERSION@$(EXEEXT) \
-	netcalc@COMPAT_VERSION@$(EXEEXT)
 DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
 	$(include_HEADERS) $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/ipcalc-config.h.in \
@@ -87,24 +84,14 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(docdir)" "$(DESTDIR)$(includedir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(docdir)" \
+	"$(DESTDIR)$(includedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libipcalc@COMPAT_VERSION@_la_LIBADD =
 am_libipcalc@COMPAT_VERSION@_la_OBJECTS = ipcalc.lo
 libipcalc@COMPAT_VERSION@_la_OBJECTS =  \
 	$(am_libipcalc@COMPAT_VERSION@_la_OBJECTS)
-binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
-PROGRAMS = $(bin_PROGRAMS)
-am_ip2long@COMPAT_VERSION@_OBJECTS = ip2long.$(OBJEXT)
-ip2long@COMPAT_VERSION@_OBJECTS =  \
-	$(am_ip2long@COMPAT_VERSION@_OBJECTS)
-ip2long@COMPAT_VERSION@_DEPENDENCIES = libipcalc@COMPAT_VERSION@.la
-am_netcalc@COMPAT_VERSION@_OBJECTS = netcalc.$(OBJEXT)
-netcalc@COMPAT_VERSION@_OBJECTS =  \
-	$(am_netcalc@COMPAT_VERSION@_OBJECTS)
-netcalc@COMPAT_VERSION@_DEPENDENCIES = libipcalc@COMPAT_VERSION@.la
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
 depcomp =
 am__depfiles_maybe =
@@ -116,12 +103,8 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) \
-	$(ip2long@COMPAT_VERSION@_SOURCES) \
-	$(netcalc@COMPAT_VERSION@_SOURCES)
-DIST_SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES) \
-	$(ip2long@COMPAT_VERSION@_SOURCES) \
-	$(netcalc@COMPAT_VERSION@_SOURCES)
+SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES)
+DIST_SOURCES = $(libipcalc@COMPAT_VERSION@_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-exec-recursive install-info-recursive \
@@ -272,17 +255,13 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 #m4/ipcalc@COMPAT_VERSION@.m4:
 #	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
 #endif
-SUBDIRS = . scripts man
+SUBDIRS = . utils scripts man
 AM_CFLAGS = -Wall
+AM_LDFLAGS = -version-info $(SONAME_INFO)
 include_HEADERS = ipcalc.h
-noinst_HEADERS = util.h common.h
+noinst_HEADERS = common.h
 lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
-libipcalc@COMPAT_VERSION@_la_LDFLAGS = -version-info $(SONAME_INFO)
-ip2long@COMPAT_VERSION@_SOURCES = ip2long.c
-ip2long@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
-netcalc@COMPAT_VERSION@_SOURCES = netcalc.c
-netcalc@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
 all: ipcalc-config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -367,40 +346,6 @@ clean-libLTLIBRARIES:
 	done
 libipcalc@COMPAT_VERSION@.la: $(libipcalc@COMPAT_VERSION@_la_OBJECTS) $(libipcalc@COMPAT_VERSION@_la_DEPENDENCIES) 
 	$(LINK) -rpath $(libdir) $(libipcalc@COMPAT_VERSION@_la_LDFLAGS) $(libipcalc@COMPAT_VERSION@_la_OBJECTS) $(libipcalc@COMPAT_VERSION@_la_LIBADD) $(LIBS)
-install-binPROGRAMS: $(bin_PROGRAMS)
-	@$(NORMAL_INSTALL)
-	test -z "$(bindir)" || $(mkdir_p) "$(DESTDIR)$(bindir)"
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  if test -f $$p \
-	     || test -f $$p1 \
-	  ; then \
-	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
-	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) '$$p' '$(DESTDIR)$(bindir)/$$f'"; \
-	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) "$$p" "$(DESTDIR)$(bindir)/$$f" || exit 1; \
-	  else :; fi; \
-	done
-
-uninstall-binPROGRAMS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's,^.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
-	  echo " rm -f '$(DESTDIR)$(bindir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(bindir)/$$f"; \
-	done
-
-clean-binPROGRAMS:
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  echo " rm -f $$p $$f"; \
-	  rm -f $$p $$f ; \
-	done
-ip2long@COMPAT_VERSION@$(EXEEXT): $(ip2long@COMPAT_VERSION@_OBJECTS) $(ip2long@COMPAT_VERSION@_DEPENDENCIES) 
-	@rm -f ip2long@COMPAT_VERSION@$(EXEEXT)
-	$(LINK) $(ip2long@COMPAT_VERSION@_LDFLAGS) $(ip2long@COMPAT_VERSION@_OBJECTS) $(ip2long@COMPAT_VERSION@_LDADD) $(LIBS)
-netcalc@COMPAT_VERSION@$(EXEEXT): $(netcalc@COMPAT_VERSION@_OBJECTS) $(netcalc@COMPAT_VERSION@_DEPENDENCIES) 
-	@rm -f netcalc@COMPAT_VERSION@$(EXEEXT)
-	$(LINK) $(netcalc@COMPAT_VERSION@_LDFLAGS) $(netcalc@COMPAT_VERSION@_OBJECTS) $(netcalc@COMPAT_VERSION@_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -728,13 +673,10 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA) $(HEADERS) \
-		ipcalc-config.h
-install-binPROGRAMS: install-libLTLIBRARIES
-
+all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS) ipcalc-config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -764,8 +706,8 @@ maintainer-clean-generic:
 @COMPAT_FALSE@install-data-hook:
 clean: clean-recursive
 
-clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
-	clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+	mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
@@ -787,7 +729,7 @@ install-data-am: install-dist_docDATA install-includeHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 
-install-exec-am: install-binPROGRAMS install-libLTLIBRARIES
+install-exec-am: install-libLTLIBRARIES
 
 install-info: install-info-recursive
 
@@ -814,33 +756,30 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-dist_docDATA \
-	uninstall-includeHEADERS uninstall-info-am \
-	uninstall-libLTLIBRARIES
+uninstall-am: uninstall-dist_docDATA uninstall-includeHEADERS \
+	uninstall-info-am uninstall-libLTLIBRARIES
 
 uninstall-info: uninstall-info-recursive
 
 .PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am am--refresh check \
-	check-am clean clean-binPROGRAMS clean-generic \
-	clean-libLTLIBRARIES clean-libtool clean-recursive ctags \
-	ctags-recursive dist dist-all dist-bzip2 dist-gzip dist-hook \
-	dist-shar dist-tarZ dist-zip distcheck distclean \
-	distclean-compile distclean-generic distclean-hdr \
-	distclean-libtool distclean-recursive distclean-tags \
-	distcleancheck distdir distuninstallcheck dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-data-hook \
-	install-dist_docDATA install-exec install-exec-am \
-	install-includeHEADERS install-info install-info-am \
-	install-libLTLIBRARIES install-man install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic maintainer-clean-recursive \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-dist_docDATA \
-	uninstall-includeHEADERS uninstall-info-am \
-	uninstall-libLTLIBRARIES
+	check-am clean clean-generic clean-libLTLIBRARIES \
+	clean-libtool clean-recursive ctags ctags-recursive dist \
+	dist-all dist-bzip2 dist-gzip dist-hook dist-shar dist-tarZ \
+	dist-zip distcheck distclean distclean-compile \
+	distclean-generic distclean-hdr distclean-libtool \
+	distclean-recursive distclean-tags distcleancheck distdir \
+	distuninstallcheck dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am \
+	install-data-hook install-dist_docDATA install-exec \
+	install-exec-am install-includeHEADERS install-info \
+	install-info-am install-libLTLIBRARIES install-man \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	maintainer-clean-recursive mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
+	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
+	uninstall-dist_docDATA uninstall-includeHEADERS \
+	uninstall-info-am uninstall-libLTLIBRARIES
 
 
 dist-hook:
