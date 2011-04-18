@@ -62,6 +62,7 @@ AC_HEADER_STDC
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/socket.h stdbool.h getopt.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
 AC_C_CONST
 AC_TYPE_SIZE_T
 AC_HEADER_TIME

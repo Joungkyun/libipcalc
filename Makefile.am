@@ -68,15 +68,13 @@ lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
 libipcalc@COMPAT_VERSION@_la_LDFLAGS = -version-info $(SONAME_INFO)
 
-if ! COMPAT
-bin_PROGRAMS = ip2long netcalc
-ip2long_SOURCES = ip2long.c
-ip2long_LDADD = libipcalc.la
+bin_PROGRAMS = ip2long@COMPAT_VERSION@
+ip2long@COMPAT_VERSION@_SOURCES = ip2long.c
+ip2long@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
 
-bin_PROGRAMS += netcalc
-netcalc_SOURCES = netcalc.c
-netcalc_LDADD = libipcalc.la
-endif
+bin_PROGRAMS += netcalc@COMPAT_VERSION@
+netcalc@COMPAT_VERSION@_SOURCES = netcalc.c
+netcalc@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
 
 dist-hook:
 	$(PERL) -pi -e \
