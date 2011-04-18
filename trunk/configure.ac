@@ -14,6 +14,8 @@ AC_CONFIG_SRCDIR([ipcalc.h])
 AC_CONFIG_HEADER([ipcalc-config.h])
 AC_PREFIX_DEFAULT([/usr/local])
 
+AC_DEFUN([AC_DATAROOTDIR_CHECKED])
+
 AC_SUBST(SONAME_INFO)
 AC_SUBST(SONAME_VERSION)
 AC_SUBST(SONAME_MAJOR)
@@ -38,6 +40,7 @@ AC_PROG_LN_S
 AC_PROG_AWK
 AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
+AC_LIB_RPATH
 
 AC_PATH_PROG(PERL, perl)
 if test ! -f "$ac_cv_path_PERL"; then
@@ -48,6 +51,7 @@ AC_PATH_PROG(DATE, date)
 if test ! -f "$ac_cv_path_DATE"; then
 	AC_MSG_ERROR(Can't not found date)
 fi
+
 
 AC_SUBST(PACKAGE_DATE)
 PACKAGE_DATE=$($DATE +"%a %b %d %Y")
