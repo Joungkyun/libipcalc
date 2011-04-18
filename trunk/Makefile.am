@@ -51,7 +51,7 @@ endif
 #endif
 
 
-SUBDIRS = . utils scripts man
+SUBDIRS = . utils test scripts man
 
 SONAME_MAJOR    = @SONAME_MAJOR@
 SONAME_MINOR    = @SONAME_MINOR@
