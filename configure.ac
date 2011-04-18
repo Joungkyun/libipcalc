@@ -5,7 +5,11 @@
 
 #
 AC_PREREQ(2.59)
-AC_INIT([ipcalc], [1.0.1], [http://oops.org])
+AC_INIT([libipcalc], [1.0.1], [http://oops.org])
+AC_CONFIG_AUX_DIR([tools])
+AM_INIT_AUTOMAKE([-Wall -Werror -Wno-override foreign no-dependencies])
+AM_MAINTAINER_MODE
+
 AC_CONFIG_SRCDIR([ipcalc.h])
 AC_CONFIG_HEADER([ipcalc-config.h])
 AC_PREFIX_DEFAULT([/usr/local])
@@ -25,83 +29,37 @@ SONAME_VALUE=$(($SONAME_MAJOR + $SONAME_MINOR))
 SONAME_INFO="$SONAME_VALUE:$SONAME_REVISION:$SONAME_MINOR"
 
 # Checks for programs.
+AC_PROG_CXX
 AC_PROG_CC
+AC_PROG_CPP
+AX_GL_VISIBILITY
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_AWK
 AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 
-AC_ARG_WITH(compat,
-[  --with-compat=VERSION   build compat library])
-
-#AC_PATH_PROG(MAKE, make)
-#if test ! -f "$ac_cv_path_MAKE"; then
-#	AC_MSG_ERROR(Can't not found make)
-#fi
-
 AC_PATH_PROG(PERL, perl)
 if test ! -f "$ac_cv_path_PERL"; then
 	AC_MSG_ERROR(Can't not found perl)
 fi
 
-AC_PATH_PROG(STRIP, strip)
-if test ! -f "$ac_cv_path_STRIP"; then
-	AC_MSG_ERROR(Can't not found strip)
+AC_PATH_PROG(DATE, date)
+if test ! -f "$ac_cv_path_DATE"; then
+	AC_MSG_ERROR(Can't not found date)
 fi
 
-AC_PATH_PROG(RM, rm)
-if test ! -f "$ac_cv_path_RM"; then
-	AC_MSG_ERROR(Can't not found rm)
-fi
+AC_SUBST(PACKAGE_DATE)
+PACKAGE_DATE=$($DATE +"%a %b %d %Y")
 
-AC_PATH_PROG(HEAD, head)
-if test ! -f "$ac_cv_path_HEAD"; then
-	AC_MSG_ERROR(Can't not found head)
-fi
+AX_COMPAT_OPTION
 
-AC_PATH_PROG(MKDIR, mkdir)
-if test ! -f "$ac_cv_path_MKDIR"; then
-	AC_MSG_ERROR(Can't not found mkdir)
-fi
-
-AC_PATH_PROG(MV, mv)
-if test ! -f "$ac_cv_path_MV"; then
-	AC_MSG_ERROR(Can't not found mv)
-fi
-
+# Checks for libraries.
 AC_CHECK_LIB(dl, dlopen,,)
-
-if test "x$with_compat" != "x" && test "$with_compat" != "no" ; then
-	AC_MSG_CHECKING(for compat library version)
-	if test "$with_compat" = "yes"; then
-		AC_MSG_ERROR(Don't specify compat library version)
-	fi
-
-	compatv=`echo $with_compat | $PERL -pe 's/[[0-9]]//g'`
-	if test -n "$compatv"; then
-		AC_MSG_ERROR(compat version is only numeric)
-	fi
-	
-	AC_MSG_RESULT([$with_compat])
-	COMPAT_VERSION=$with_compat
-fi
-AC_SUBST(COMPAT_VERSION)
 
 # Checks for header files.
 AC_HEADER_STDC
-
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/socket.h stdbool.h getopt.h])
-
-if test "$GCC" = "yes"; then
-	 GCC_MAJOR_VERSION=`$CC --version | $HEAD -n 1 | $PERL -pe 's|^([[^0-9]]*)([[0-9]]+)\..*|\2|g'`
-	 if test $GCC_MAJOR_VERSION -ge 4; then
-		 CFLAGS="$CFLAGS -fvisibility=hidden"
-	 fi
-fi
-
-PC_DEFS=`echo $DEFS | perl -pe 's/-DHAVE_CONFIG_H[\s]*//g'`
-AC_SUBST(PC_DEFS)
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -114,5 +72,12 @@ AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ul
 AC_FUNC_MALLOC
 AC_FUNC_STAT
 
-AC_CONFIG_FILES([Makefile ipcalc.pc ipcalc-config libipcalc.spec])
+AX_STATIC_BINDIR
+AC_CONFIG_FILES([
+	Makefile
+	man/Makefile
+	scripts/Makefile
+	scripts/ipcalc.pc
+	scripts/ipcalc-config
+])
 AC_OUTPUT
