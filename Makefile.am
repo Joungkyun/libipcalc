@@ -51,7 +51,7 @@ endif
 #endif
 
 
-SUBDIRS = . scripts man
+SUBDIRS = . utils scripts man
 
 SONAME_MAJOR    = @SONAME_MAJOR@
 SONAME_MINOR    = @SONAME_MINOR@
@@ -60,21 +60,13 @@ SONAME_INFO     = @SONAME_INFO@
 SONAME_VERSION  = @SONAME_VERSION@
 
 AM_CFLAGS = -Wall
+AM_LDFLAGS = -version-info $(SONAME_INFO)
 
 include_HEADERS = ipcalc.h
-noinst_HEADERS = util.h common.h
+noinst_HEADERS = common.h
 
 lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
-libipcalc@COMPAT_VERSION@_la_LDFLAGS = -version-info $(SONAME_INFO)
-
-bin_PROGRAMS = ip2long@COMPAT_VERSION@
-ip2long@COMPAT_VERSION@_SOURCES = ip2long.c
-ip2long@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
-
-bin_PROGRAMS += netcalc@COMPAT_VERSION@
-netcalc@COMPAT_VERSION@_SOURCES = netcalc.c
-netcalc@COMPAT_VERSION@_LDADD = libipcalc@COMPAT_VERSION@.la
 
 dist-hook:
 	$(PERL) -pi -e \
