@@ -86,5 +86,6 @@ AC_CONFIG_FILES([
 	scripts/ipcalc-config
 	test/Makefile
 	utils/Makefile
+	m4/ipcalc.m4
 ])
 AC_OUTPUT

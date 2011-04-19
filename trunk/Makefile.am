@@ -39,16 +39,16 @@ docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 dist_doc_DATA = Changes README LICENSE
 endif
 
-#m4dir = $(datadir)/aclocal
-#dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
+m4dir = $(datadir)/aclocal
+dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
 
-#if COMPAT
-#BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
-#DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
-#
-#m4/ipcalc@COMPAT_VERSION@.m4:
-#	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
-#endif
+if COMPAT
+BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
+DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
+
+m4/ipcalc@COMPAT_VERSION@.m4:
+	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
+endif
 
 
 SUBDIRS = . utils test scripts man
