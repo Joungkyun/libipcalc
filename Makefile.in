@@ -60,9 +60,10 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
-	$(include_HEADERS) $(noinst_HEADERS) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(srcdir)/ipcalc-config.h.in \
-	$(top_srcdir)/configure acconfig.h tools/config.guess \
+	$(dist_m4_DATA) $(include_HEADERS) $(noinst_HEADERS) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/ipcalc-config.h.in $(top_srcdir)/configure \
+	$(top_srcdir)/m4/ipcalc.m4.in acconfig.h tools/config.guess \
 	tools/config.sub tools/install-sh tools/ltmain.sh \
 	tools/missing
 subdir = .
@@ -77,7 +78,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = ipcalc-config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = m4/ipcalc.m4
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -85,7 +86,7 @@ am__vpath_adj = case $$p in \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(docdir)" \
-	"$(DESTDIR)$(includedir)"
+	"$(DESTDIR)$(m4dir)" "$(DESTDIR)$(includedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libipcalc@COMPAT_VERSION@_la_LIBADD =
@@ -113,7 +114,8 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	uninstall-recursive
 am__dist_doc_DATA_DIST = Changes README LICENSE
 dist_docDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(dist_doc_DATA)
+dist_m4DATA_INSTALL = $(INSTALL_DATA)
+DATA = $(dist_doc_DATA) $(dist_m4_DATA)
 includeHEADERS_INSTALL = $(INSTALL_HEADER)
 HEADERS = $(include_HEADERS) $(noinst_HEADERS)
 ETAGS = etags
@@ -244,17 +246,10 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 
 @COMPAT_FALSE@docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 @COMPAT_FALSE@dist_doc_DATA = Changes README LICENSE
-
-#m4dir = $(datadir)/aclocal
-#dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
-
-#if COMPAT
-#BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
-#DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
-#
-#m4/ipcalc@COMPAT_VERSION@.m4:
-#	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
-#endif
+m4dir = $(datadir)/aclocal
+dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
+@COMPAT_TRUE@BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
+@COMPAT_TRUE@DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
 SUBDIRS = . utils test scripts man
 AM_CFLAGS = -Wall
 AM_LDFLAGS = -version-info $(SONAME_INFO)
@@ -317,6 +312,8 @@ $(srcdir)/ipcalc-config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) $(top
 
 distclean-hdr:
 	-rm -f ipcalc-config.h stamp-h1
+m4/ipcalc.m4: $(top_builddir)/config.status $(top_srcdir)/m4/ipcalc.m4.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
 	test -z "$(libdir)" || $(mkdir_p) "$(DESTDIR)$(libdir)"
@@ -387,6 +384,23 @@ uninstall-dist_docDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(docdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(docdir)/$$f"; \
+	done
+install-dist_m4DATA: $(dist_m4_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(m4dir)" || $(mkdir_p) "$(DESTDIR)$(m4dir)"
+	@list='$(dist_m4_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(dist_m4DATA_INSTALL) '$$d$$p' '$(DESTDIR)$(m4dir)/$$f'"; \
+	  $(dist_m4DATA_INSTALL) "$$d$$p" "$(DESTDIR)$(m4dir)/$$f"; \
+	done
+
+uninstall-dist_m4DATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_m4_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(m4dir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(m4dir)/$$f"; \
 	done
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
@@ -676,7 +690,7 @@ check: check-recursive
 all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS) ipcalc-config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(includedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(m4dir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -699,6 +713,7 @@ clean-generic:
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -725,7 +740,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-dist_docDATA install-includeHEADERS
+install-data-am: install-dist_docDATA install-dist_m4DATA \
+	install-includeHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 
@@ -756,8 +772,9 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-dist_docDATA uninstall-includeHEADERS \
-	uninstall-info-am uninstall-libLTLIBRARIES
+uninstall-am: uninstall-dist_docDATA uninstall-dist_m4DATA \
+	uninstall-includeHEADERS uninstall-info-am \
+	uninstall-libLTLIBRARIES
 
 uninstall-info: uninstall-info-recursive
 
@@ -770,17 +787,22 @@ uninstall-info: uninstall-info-recursive
 	distclean-recursive distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am \
-	install-data-hook install-dist_docDATA install-exec \
-	install-exec-am install-includeHEADERS install-info \
-	install-info-am install-libLTLIBRARIES install-man \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	maintainer-clean-recursive mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
-	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-dist_docDATA uninstall-includeHEADERS \
-	uninstall-info-am uninstall-libLTLIBRARIES
+	install-data-hook install-dist_docDATA install-dist_m4DATA \
+	install-exec install-exec-am install-includeHEADERS \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-strip installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic maintainer-clean-recursive \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-dist_docDATA uninstall-dist_m4DATA \
+	uninstall-includeHEADERS uninstall-info-am \
+	uninstall-libLTLIBRARIES
 
+
+@COMPAT_TRUE@m4/ipcalc@COMPAT_VERSION@.m4:
+@COMPAT_TRUE@	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
 
 dist-hook:
 	$(PERL) -pi -e \
