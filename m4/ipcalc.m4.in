@@ -22,15 +22,15 @@ AC_SUBST(IPCALC_CPPFLAGS)
 
 AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 [
-	AC_ARG_WITH(ipcalc,
-		[  --with-ipcalc=PATH      path of ipcalc-config [[default: @static_bindir@/ipcalc@COMPAT_VERSION@-config]]])
+	AC_ARG_WITH(ipcalc@COMPAT_VERSION@,
+		[  --with-ipcalc@COMPAT_VERSION@=PATH      path of ipcalc@COMPAT_VERSION@-config [[default: @static_bindir@/ipcalc@COMPAT_VERSION@-config]]])
 
-	if test "x$with_ipcalc" != "no"; then
-		if test "x$with_ipcalc" != "x"; then
-			if test "x$with_ipcalc" = "xyes"; then
+	if test "x$with_ipcalc@COMPAT_VERSION@" != "no"; then
+		if test "x$with_ipcalc@COMPAT_VERSION@" != "x"; then
+			if test "x$with_ipcalc@COMPAT_VERSION@" = "xyes"; then
 				ipcalcconfig="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
 			else
-				ipcalcconfig="$with_ipcalc"
+				ipcalcconfig="$with_ipcalc@COMPAT_VERSION@"
 			fi
 		else
 			ipcalcconfig="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
@@ -50,13 +50,13 @@ AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 		ipcalc_OLD_FLAGS="$LDFLAGS"
 		LDFLAGS="$IPCALC_LDFLAGS"
 		AC_CHECK_LIB(
-			ipcalc, ip2long, [
+			ipcalc@COMPAT_VERSION@, ip2long, [
 			AC_DEFINE(
-				[HAVE_LIBIPCALC], 1,
-				[Define to 1 if you have the `ipcalc' library (-lipcalc).]
+				[HAVE_LIBIPCALC@COMPAT_VERSION@], 1,
+				[Define to 1 if you have the `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@).]
 			LIBS="`$ipcalcconfig --libs` $LIBS"],[
 			if test $# -gt 0; then
-				AC_MSG_ERROR([Can't not found ipcalc library (-lipcalc)])
+				AC_MSG_ERROR([Can't not found ipcalc@COMPAT_VERSION@ library (-lipcalc@COMPAT_VERSION@)])
 			fi]
 		)
 		LDFLAGS="$ipcalc_OLD_LDFLAGS"
@@ -90,6 +90,6 @@ AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 			fi
 		done
 		test $ret_cppflags -eq 0 && CPPFLAGS="$IPCALC_INCLUDES $CPPFLAGS"
-		AC_CHECK_HEADERS(ipcalc.h)
+		AC_CHECK_HEADERS(ipcalc@COMPAT_VERSION@.h)
 	fi
 ])
