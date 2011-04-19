@@ -47,7 +47,7 @@ AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 		# ipcalc library check
 		#
 		IPCALC_LDFLAGS="`$ipcalcconfig --ldflags`"
-		ipcalc_OLD_FLAGS="$LDFLAGS"
+		ipcalc_OLD_LDFLAGS="$LDFLAGS"
 		LDFLAGS="$IPCALC_LDFLAGS"
 		AC_CHECK_LIB(
 			ipcalc@COMPAT_VERSION@, ip2long, [
