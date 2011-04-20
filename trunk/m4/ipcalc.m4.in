@@ -53,7 +53,7 @@ AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 			ipcalc@COMPAT_VERSION@, ip2long, [
 			AC_DEFINE(
 				[HAVE_LIBIPCALC@COMPAT_VERSION@], 1,
-				[Define to 1 if you have the `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@).]
+				[Define to 1 if you have the `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@).])
 			LIBS="`$ipcalcconfig --libs` $LIBS"],[
 			if test $# -gt 0; then
 				AC_MSG_ERROR([Can't not found ipcalc@COMPAT_VERSION@ library (-lipcalc@COMPAT_VERSION@)])
