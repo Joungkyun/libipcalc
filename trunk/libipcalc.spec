@@ -57,6 +57,7 @@ and subnetting IP address.
 
 %files
 %defattr(0755,root,root)
+%doc Changes LICENSE README
 %{_libdir}/*.so.*
 
 %files devel
@@ -74,7 +75,7 @@ and subnetting IP address.
 %defattr(0644,root,root,0755)
 %{_bindir}/ip2long%{?compat}
 %{_bindir}/netcalc%{?compat}
-%{_datadir}/aclocl/*.m4
+%{_datadir}/aclocal/*.m4
 %{!?compat:%{_mandir}/man1/*.1*}
 %{!?compat:%{_mandir}/ko/man1/*.1*}
 
