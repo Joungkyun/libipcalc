@@ -59,6 +59,7 @@ if test $# -eq 0; then
 fi
 
 [ -f "$local_la_file" ] && la_file=$local_la_file
+. $la_file
 
 while test $# -gt 0; do
 	case "$1" in
