@@ -19,6 +19,7 @@
 # $Id: Makefile.am,v 1.6 2011-04-12 16:36:35 oops Exp $
 
 ACLOCAL_AMFLAGS = -I m4
+DISTCLEANFILES =
 
 EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/patches/01-remove-rpath.patch \
@@ -44,7 +45,7 @@ dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
 
 if COMPAT
 BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
-DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
+DISTCLEANFILES += m4/ipcalc@COMPAT_VERSION@.m4
 
 m4/ipcalc@COMPAT_VERSION@.m4:
 	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
@@ -68,6 +69,8 @@ noinst_HEADERS = common.h
 lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
 
+DISTCLEANFILES += *.bz2
+
 dist-hook:
 	$(PERL) -pi -e \
 			"s/\@PACKAGE_VERSION\@/$(VERSION)/g" \
@@ -80,3 +83,6 @@ if COMPAT
 install-data-hook:
 	mv $(DESTDIR)$(includedir)/ipcalc.h $(DESTDIR)$(includedir)/ipcalc@COMPAT_VERSION@.h
 endif
+
+test-install:
+	$(MAKE) DESTDIR=`pwd`/z install

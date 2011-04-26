@@ -59,19 +59,20 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@COMPAT_TRUE@am__append_1 = m4/ipcalc@COMPAT_VERSION@.m4
 DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
 	$(dist_m4_DATA) $(include_HEADERS) $(noinst_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/ipcalc-config.h.in $(top_srcdir)/configure \
 	$(top_srcdir)/m4/ipcalc.m4.in acconfig.h tools/config.guess \
-	tools/config.sub tools/install-sh tools/ltmain.sh \
-	tools/missing
+	tools/config.rpath tools/config.sub tools/install-sh \
+	tools/ltmain.sh tools/missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_compat_option.m4 \
 	$(top_srcdir)/m4/ax_gcc_visibiliity.m4 \
 	$(top_srcdir)/m4/ax_static_bindir.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -230,6 +231,7 @@ static_bindir = @static_bindir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 ACLOCAL_AMFLAGS = -I m4
+DISTCLEANFILES = $(am__append_1) *.bz2
 EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/patches/01-remove-rpath.patch \
 			debian/control \
@@ -249,7 +251,6 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 m4dir = $(datadir)/aclocal
 dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
 @COMPAT_TRUE@BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
-@COMPAT_TRUE@DISTCLEANFILES = m4/ipcalc@COMPAT_VERSION@.m4
 SUBDIRS = . utils test scripts man
 AM_CFLAGS = -Wall
 AM_LDFLAGS = -version-info $(SONAME_INFO)
@@ -814,6 +815,9 @@ dist-hook:
 
 @COMPAT_TRUE@install-data-hook:
 @COMPAT_TRUE@	mv $(DESTDIR)$(includedir)/ipcalc.h $(DESTDIR)$(includedir)/ipcalc@COMPAT_VERSION@.h
+
+test-install:
+	$(MAKE) DESTDIR=`pwd`/z install
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
