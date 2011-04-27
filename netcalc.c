@@ -6,7 +6,6 @@
 #   include <ipcalc-config.h>
 #endif
 
-#include <common.h>
 #include <ipcalc.h>
 #include <sys/types.h>
 #include <sys/stat.h>

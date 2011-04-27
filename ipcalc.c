@@ -15,7 +15,6 @@
 #   include <ipcalc-config.h>
 #endif
 
-#include <common.h>
 #include <ipcalc.h>
 
 /*

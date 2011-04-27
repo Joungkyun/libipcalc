@@ -1,4 +1,3 @@
-usr/bin/ip2long
-usr/bin/netcalc
+usr/bin/*
 usr/share/man/man1/*.1*
 usr/share/man/ko/man1/*.1*

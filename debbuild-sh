@@ -37,7 +37,7 @@ graceful_stop() {
 
 	[ -f "Makefile" ] && \
 		echo "  * Source cleaning" && \
-		debian/rules clean
+		make distclean
 	[ -n "$PROG" -a -d "debian/$PROG" ] && rm -rf debian/$PROG
 
 	exit 1
@@ -77,7 +77,7 @@ do_unpatch
 [ $? -ne 0 ] && graceful_stop
 
 cd debian
-mv -f changelog.debbuild changelog
+cp -af changelog.debbuild changelog
 cd -
 debian/rules clean
 #make distclean
