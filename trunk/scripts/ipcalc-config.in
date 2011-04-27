@@ -54,7 +54,7 @@ EOF
 
 
 if test $# -eq 0; then
-	echo "${usage}" 1>&2
+	usage
 	exit 1
 fi
 
@@ -121,7 +121,7 @@ while test $# -gt 0; do
 			echo "@VERSION@"
 			;;
 		*)
-			echo "${usage}" 1>&2
+			usage
 			exit 1
 			;;
 	esac
