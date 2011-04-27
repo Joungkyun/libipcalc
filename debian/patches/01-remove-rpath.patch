@@ -1,5 +1,5 @@
-diff -urNp libipcalc.org//utils/Makefile.in libipcalc/utils/Makefile.in
---- libipcalc.org//utils/Makefile.in	2011-04-18 14:23:17.526502997 +0900
+diff -urNp libipcalc.org/utils/Makefile.in libipcalc/utils/Makefile.in
+--- libipcalc.org/utils/Makefile.in	2011-04-18 14:23:17.526502997 +0900
 +++ libipcalc/utils/Makefile.in	2011-04-18 18:40:02.366503001 +0900
 @@ -254,6 +254,8 @@ install-binPROGRAMS: $(bin_PROGRAMS)
  	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
