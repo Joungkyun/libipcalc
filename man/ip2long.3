@@ -1,26 +1,27 @@
-.TH IP2LONG 3 "10 Jan 2011"
+.TH IP2LONG 3 "22 May 2010"
+.UC 4
 
-.SH NAME
-ip2long \- convert IPv4 ip address to long type
+.SH 이름
+ip2long \- (IPv4) ip 주소를 Long IP로 변환
 
-.SH SYNOPSIS
+.SH 사용법
 .BI "#include <ipcalc.h>"
 .br
 .BI "ulong ip2long (char * " ipaddress ");"
 
-.SH DESCRIPTION
+.SH 설명
 .BI ip2long
-api converts a string containing an (IPv4) Internet Protocol
-dotted address into a proper address
+API는 (IPv4) 인터넷 주소(ip address)를 Long IP(unsigned long type)로 변환을 한다.
 
-.SH "RETURN VALUE"
+.SH 반환값
 .PP
-If success, returns
+성공시에
 .BI "unsigned long"
-format value, and  on fails, returns
+값을 반환하며, 실패시에
 .BI 0
+을 반환한다.
 
-.SH EXAMPLE
+.SH 예제
 .nf
 #include <ipcalc.h>
 
@@ -35,14 +36,15 @@ int main (void) {
 }
 .fi
 
-.SH AUTHORS
-JoungKyun.Kim <http://oops.org>
+.SH 저자
+김정균
 
-.SH BUGS
-Report to QnA bulletin board of http://oops.org
+.SH 버그 리포트
+<http://oops.org> 의 QnA 게시판을 이용한다.
 
-.SH COPYRIGHT
-Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+.SH 저작권
+Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
 
-This api is follows
-.BI LGPL 2.1
+이 API는 
+.BI LGPL
+을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.

@@ -1,26 +1,29 @@
-.TH VALID_IP_ADDRESS 3 "10 Jan 2011"
+.TH VALID_IP_ADDRESS 3 "08 Jun 2010"
+.UC 4
 
-.SH NAME
-valid_ip_address \- validate IPv4 address or domain name.
+.SH 이름
+valid_ip_address \- (IPv4) ip 주소 또는 도메인 이름의 유효성을 확인
 
-.SH SYNOPSIS
+.SH 사용법
 .BI "#include <ipcalc.h>"
 .br
 .BI "short valid_ip_address (char * " address ", char * " err ");"
 
-.SH DESCRIPTION
+.SH 설명
 .BI valid_ip_address
-api checks whether IPv4 address or domain name is valid or invalid.
-If 1st argument value is domain name, this value is converted IPv4 address.
+API는 (IPv4) 인터넷 주소(ip address) 또는 도메인 이름이 유효한지에 대한 확인을 한다.
+argument를 도메인 이름으로 주었을 경우, 유효한 도메인일 경우 argument의 값이 IP로
+변경되는 것을 주의 하도록 한다.
 
-.SH "RETURN VALUE"
+.SH 반환값
 .PP
-If given value is valid, returns 
-.BI "0",
-otherwise returns
-.BI "1".
+주어진 값이 유효할 경우
+.BI "0"
+을 반환하며, 실패시에
+.BI 1
+을 반환한다.
 
-.SH EXAMPLE
+.SH 예제
 .nf
 #include <ipcalc.h>
 
@@ -43,14 +46,15 @@ int main (void) {
 }
 .fi
 
-.SH AUTHORS
-JoungKyun.Kim <http://oops.org>
+.SH 저자
+김정균
 
-.SH BUGS
-Report to QnA bulletin board of http://oops.org
+.SH 버그 리포트
+<http://oops.org> 의 QnA 게시판을 이용한다.
 
-.SH COPYRIGHT
-Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+.SH 저작권
+Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
 
-This api is follows
-.BI LGPL 2.1
+이 API는 
+.BI LGPL
+을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.

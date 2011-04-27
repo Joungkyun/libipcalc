@@ -27,15 +27,4 @@
 
 @BOTTOM@
 
-
-/*
- * Compotable C Type
- */
-
-#if ! defined C_ULONG_DEFINED
-#	if ! defined ulong
-		typedef	unsigned long	ulong;
-#	endif
-#endif
-
 #endif /* IPCALC_CONFIG_H */

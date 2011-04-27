@@ -1,41 +1,46 @@
-.TH LONG2IP 3 "10 Jan 2011"
+.TH LONG2IP 3 "22 May 2010"
+.UC 4
 
-.SH NAME
-long2ip \- convert Long IP to (IPv4) ip address.
+.SH 이름
+long2ip \- Long IP를 (IPv4) ip 주소로 변환
 
-.SH SYNOPSIS
+.SH 사용법
 .BI "#include <ipcalc.h>"
 .br
 .BI "char * long2ip (ulong " longip ");"
 .br
 .BI "char * long2ip_r (ulong " longip ", char * " dest ");"
 .PP
-.SH DESCRIPTION
+.SH 설명
 .BI long2ip
-api converts IPv4 ip address to unsigned long type.
+API는 Long IP(unsigned long type)을 (IPv4) 인터넷 주소(ip address)로 변환을 한다.
 .PP
 .BI long2ip
-api converts IPv4 address into a string in Internet standard
-dotted format. The string is returned in a statically allocated
-buffer, which subsequent calls will overwrite.
+API는 정적으로 할당된 버퍼를 반환하기 때문에, 다음에 호출될 때 이 버퍼를
+덮어씌우게 되는 것을 주의해야 한다.
 .PP
-For thread safe problem of
-.BI long2ip,
+.BI long2ip
+API가 정적 버퍼를 사용하기 때문에 thread safe 문제가 발생할 수 있다. 이를 위하여
 .BI long2_ip_r
-is supported. See also follow examples.
-
-.SH "RETURN VALUE"
-.PP
-On success, return
-.BI "IPv4"
-address, on failes returns
-.BI "0.0.0.0".
-.br
-Return value of
+API를 제공한다.
 .BI long2ip_r
-is same value that allocated to 2th arguments
+API의 사용법은
+.BI long2ip
+와 동일하지만, 2번째 인자로 buffer를 직접 제공한다는 점에서 차이가 있다. 아래의
+예제를 참조 하도록 한다.
 
-.SH EXAMPLE
+.SH 반환값
+.PP
+성공시에
+.BI "IPv4 주소"
+값을 반환하며, 실패시에
+.BI "0.0.0.0"
+을 반환한다.
+.br
+.BI long2ip_r
+의 반환값은 2번째 인자에 할당되는 값과 동일하다.
+
+.SH 예제
 .nf
 #include <ipcalc.h>
 
@@ -55,14 +60,15 @@ int main (void) {
 }
 .fi
 
-.SH AUTHORS
-JoungKyun.Kim <http://oops.org>
+.SH 저자
+김정균
 
-.SH BUGS
-Report to QnA bulletin board of http://oops.org
+.SH 버그 리포트
+<http://oops.org> 의 QnA 게시판을 이용한다.
 
-.SH COPYRIGHT
-Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+.SH 저작권
+Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
 
-This api is follows
-.BI LGPL 2.1
+이 API는 
+.BI LGPL
+을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.
