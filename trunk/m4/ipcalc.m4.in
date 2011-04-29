@@ -17,98 +17,194 @@ dnl along with this program.  If not, see <http://www.gnu.org/licenses/>.
 dnl
 dnl $Id: Makefile.am,v 1.6 2011-04-12 16:36:35 oops Exp $
 
-AC_SUBST(IPCALC_LDFLAGS)
-AC_SUBST(IPCALC_CPPFLAGS)
+AC_DEFUN([AX_IPCALC@COMPAT_VERSION@_WITH],
+[
+	if test "x$with_ipcalc@COMPAT_VERSION@" != "x"; then
+		if test "x$with_ipcalc@COMPAT_VERSION@" = "xyes"; then
+			ipcalc@COMPAT_VERSION@config="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
+		else
+			ipcalc@COMPAT_VERSION@config="$with_ipcalc@COMPAT_VERSION@"
+		fi
+	else
+		ipcalc@COMPAT_VERSION@config="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
+	fi
 
+	AC_MSG_CHECKING(for ipcalc@COMPAT_VERSION@-config path)
+	if test ! -f "$ipcalc@COMPAT_VERSION@config" || test ! -x "$ipcalc@COMPAT_VERSION@config"; then
+		AC_MSG_ERROR(can't find $ipcalc@COMPAT_VERSION@config)
+		if test $ipcalc@COMPAT_VERSION@_check_failed -eq 1; then
+			AC_MSG_ERROR(can't find $ipcalc@COMPAT_VERSION@config)
+		else
+			ipcalc@COMPAT_VERSION@config=
+			AC_MSG_RESULT([not found])
+		fi
+	else
+		AC_MSG_RESULT([$ipcalc@COMPAT_VERSION@config])
+	fi
+])
+
+AC_DEFUN([AX_IPCALC@COMPAT_VERSION@_HEADER],
+[
+	#
+	# ipcalc@COMPAT_VERSION@ header check
+	#
+	IPCALC@COMPAT_VERSION@_INCLUDES="`$ipcalc@COMPAT_VERSION@config --includes 2> /dev/null`"
+	if test -z "$IPCALC@COMPAT_VERSION@_INCLUDES"; then
+		$IPCALC@COMPAT_VERSION@_INCLUDES="`$ipcalc@COMPAT_VERSION@config --defs 2> /dev/null | sed 's/[[ ]]*-D[[^ ]]*//g'`"
+	fi
+
+	ret_cppflags=0
+	for check_cppflags in $CPPFLAGS
+	do
+		test -z "$IPCALC@COMPAT_VERSION@_INCLUDES" && break
+
+		if test "$check_cppflags" = "$IPCALC@COMPAT_VERSION@_INCLUDES"; then
+			ret_cppflags=1
+			break
+		fi
+	done
+	test $ret_cppflags -eq 0 && CPPFLAGS="$IPCALC@COMPAT_VERSION@_INCLUDES $CPPFLAGS"
+	AC_CHECK_HEADERS(ipcalc@COMPAT_VERSION@.h)
+	if test "$ac_cv_header_ipcalc@COMPAT_VERSION@_h" != "yes"; then
+		AC_MSG_ERROR([You must need ipcalc@COMPAT_VERSION@.h header file])
+	fi
+])
+
+AC_DEFUN([AX_IPCALC@COMPAT_VERSION@_LD],
+[
+	#
+	# ipcalc@COMPAT_VERSION@ library check
+	#
+	IPCALC@COMPAT_VERSION@_LDFLAGS="`$ipcalc@COMPAT_VERSION@config --ldflags 2> /dev/null`"
+
+	#
+	# for compatibility
+	#
+	if test -z "$IPCALC@COMPAT_VERSION@_LDFLAGS"; then
+		IPCALC@COMPAT_VERSION@_LDFLAGS="`$ipcalc@COMPAT_VERSION@config --libs 2> /dev/null | sed 's/[[[:space:]]]*-l.*//g'`"
+	fi
+
+	ipcalc@COMPAT_VERSION@_OLD_LDFLAGS="$LDFLAGS"
+	LDFLAGS="$IPCALC@COMPAT_VERSION@_LDFLAGS"
+	AC_CHECK_LIB(
+		ipcalc@COMPAT_VERSION@, ip2long, [
+			AC_DEFINE(
+				[HAVE_LIBIPCALC@COMPAT_VERSION@], 1,
+				[Define to 1 if you have the `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@).])
+			LIBS="`$ipcalc@COMPAT_VERSION@config --libs 2> /dev/null` $LIBS"
+		],[
+			if test $ipcalc@COMPAT_VERSION@_check_failed -eq 1; then
+				AC_MSG_ERROR([Can't not found `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@)])
+			fi
+		]
+	)
+	LDFLAGS="$ipcalc@COMPAT_VERSION@_OLD_LDFLAGS"
+
+	ret_ldflags=0
+	for check_ldflags in $LDFLAGS
+	do
+		test -z "$IPCALC@COMPAT_VERSION@_LDFLAGS" && break
+
+		if test "$check_ldflags" = "$IPCALC@COMPAT_VERSION@_LDFLAGS"; then
+			ret_ldflags=1
+			break
+		fi
+	done
+
+	test $ret_ldflags -eq 0 && LDFLAGS="$IPCALC@COMPAT_VERSION@_LDFLAGS $LDFLAGS"
+])
+
+AC_DEFUN([AX_IPCALC@COMPAT_VERSION@_LIBTOOL],
+[
+    #
+    # ipcalc@COMPAT_VERSION@ library check
+    #
+    AC_MSG_CHECKING(for ipcalc@COMPAT_VERSION@ in -lipcalc@COMPAT_VERSION@)
+
+    IPCALC@COMPAT_VERSION@_LIBS="`$ipcalc@COMPAT_VERSION@config --link-libtool 2> /dev/null`"
+    if test -z "$IPCALC@COMPAT_VERSION@_LDFLAGS"; then
+        IPCALC@COMPAT_VERSION@_LDFLAGS="`$ipcalc@COMPAT_VERSION@config --libs 2> /dev/null`"
+    fi
+
+    if test "x$IPCALC@COMPAT_VERSION@_LIBS" = "x"; then
+        AC_MSG_RESULT([no])
+        if test $ipcalc@COMPAT_VERSION@_check_failed -eq 1; then
+            AC_MSG_ERROR([Can't not found ipcalc@COMPAT_VERSION@ libtool library (libipcalc@COMPAT_VERSION@.la)])
+        fi
+    else
+        AC_MSG_RESULT([yes])
+        LIBS="$IPCALC@COMPAT_VERSION@_LIBS $LIBS"
+    fi
+])
+
+dnl
+dnl Usage AX_IPCALC@COMPAT_VERSION@
+dnl     AX_IPCALC@COMPAT_VERSION@([library type],[stop on failed])
+dnl         library type : ld or libtool
+dnl         stop on failed : 1 => stop, 0 => continue
+dnl
+dnl     AX_IPCALC@COMPAT_VERSION@([library type])
+dnl     AX_IPCALC@COMPAT_VERSION@(1)
+dnl
+dnl     no argument on AX_IPCALC@COMPAT_VERSION@
+dnl         library type   = ld
+dnl         stop on failed = 0
+dnl
 AC_DEFUN([AX_IPCALC@COMPAT_VERSION@],
 [
+	ax_ipcalc@COMPAT_VERSION@_argc=$#
+	ipcalc@COMPAT_VERSION@_check_failed=0
+
+	if test $ax_ipcalc@COMPAT_VERSION@_argc -gt 0; then
+		ax_ipcalc@COMPAT_VERSION@_first_arg=$1
+		ax_ipcalc@COMPAT_VERSION@_second_arg=$2
+	fi
+
+	if test $ax_ipcalc@COMPAT_VERSION@_argc -gt 0; then
+		if test $ax_ipcalc@COMPAT_VERSION@_argc -eq 2; then
+			if test "$ax_ipcalc@COMPAT_VERSION@_first_arg" = "libtool"; then
+				ipcalc@COMPAT_VERSION@_ld_mode="libtool"
+			elif test "$ax_ipcalc@COMPAT_VERSION@_first_arg" = "ld"; then
+				ipcalc@COMPAT_VERSION@_ld_mode="ld"
+			else
+				AC_MSG_ERROR([Unsupported link type on AX IPCALC@COMPAT_VERSION@ macro])
+			fi
+
+			if test $ax_ipcalc@COMPAT_VERSION@_second_arg -eq 1; then
+				ipcalc@COMPAT_VERSION@_check_failed=1
+			fi
+		elif test $ax_ipcalc@COMPAT_VERSION@_argc -eq 1; then
+			if test "$ax_ipcalc@COMPAT_VERSION@_first_arg" = "libtool"; then
+				ipcalc@COMPAT_VERSION@_ld_mode="libtool"
+			elif test "$ax_ipcalc@COMPAT_VERSION@_first_arg" = "ld"; then
+				ipcalc@COMPAT_VERSION@_ld_mode="ld"
+			elif test $ax_ipcalc@COMPAT_VERSION@_first_arg -eq 1 || test $ax_ipcalc@COMPAT_VERSION@_first_arg -eq 0 ; then
+				ipcalc@COMPAT_VERSION@_check_failed=$ax_ipcalc@COMPAT_VERSION@_first_arg
+			else
+				AC_MSG_ERROR([Unsupported argument value on AX IPCALC@COMPAT_VERSION@ macro])
+			fi
+		else
+			AC_MSG_ERROR([So many arguments on AX IPCALC@COMPAT_VERSION@ macro])
+		fi
+	fi
+
 	AC_ARG_WITH(ipcalc@COMPAT_VERSION@,
 		[  --with-ipcalc@COMPAT_VERSION@=PATH      path of ipcalc@COMPAT_VERSION@-config [[default: @static_bindir@/ipcalc@COMPAT_VERSION@-config]]])
 
 	if test "x$with_ipcalc@COMPAT_VERSION@" != "xno"; then
-		if test "x$with_ipcalc@COMPAT_VERSION@" != "x"; then
-			if test "x$with_ipcalc@COMPAT_VERSION@" = "xyes"; then
-				ipcalcconfig="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
+		AX_IPCALC@COMPAT_VERSION@_WITH
+
+		if test $ipcalc@COMPAT_VERSION@_check_failed -eq 0 && test "x$ipcalc@COMPAT_VERSION@config" != "x" ; then
+			if test "$ipcalc@COMPAT_VERSION@_ld_mode" = "libtool"; then
+				AX_IPCALC@COMPAT_VERSION@_LIBTOOL
 			else
-				ipcalcconfig="$with_ipcalc@COMPAT_VERSION@"
+				AX_IPCALC@COMPAT_VERSION@_LD
 			fi
-		else
-			ipcalcconfig="@static_bindir@/ipcalc@COMPAT_VERSION@-config"
+			AX_IPCALC@COMPAT_VERSION@_HEADER
 		fi
-
-		AC_MSG_CHECKING(for ipcalc@COMPAT_VERSION@-config path)
-		if test ! -f "$ipcalcconfig" || test ! -x "$ipcalcconfig"; then
-			AC_MSG_ERROR(can't find $ipcalcconfig)
-		else
-			AC_MSG_RESULT([$ipcalcconfig])
-		fi
-
-		#
-		# ipcalc library check
-		#
-		IPCALC_LDFLAGS="`$ipcalcconfig --ldflags 2> /dev/null`"
-		if test -z "$IPCALC_LDFLAGS"; then
-			tmp_IPCALC_LDFALGS="`$ipcalcconfig --libs 2> /dev/null`"
-			for tmp_ip_ld in $tmp_IPCALC_LDFALGS
-			do
-				echo "$tmp_ip_ld" | grep -- "-L" >& /dev/null
-				test $? -ne 0 && continue
-				IPCALC_LDFLAGS="$IPCALC_LDFLAGS $tmp_ip_ld"
-			done
-		fi
-
-		ipcalc_OLD_LDFLAGS="$LDFLAGS"
-		LDFLAGS="$IPCALC_LDFLAGS"
-		AC_CHECK_LIB(
-			ipcalc@COMPAT_VERSION@, ip2long, [
-				AC_DEFINE(
-					[HAVE_LIBIPCALC@COMPAT_VERSION@], 1,
-					[Define to 1 if you have the `ipcalc@COMPAT_VERSION@' library (-lipcalc@COMPAT_VERSION@).]
-				)
-				LIBS="`$ipcalcconfig --libs` $LIBS"
-			],[
-				if test $# -gt 0; then
-					AC_MSG_ERROR([Can't not found ipcalc@COMPAT_VERSION@ library (-lipcalc@COMPAT_VERSION@)])
-				fi
-			]
-		)
-		LDFLAGS="$ipcalc_OLD_LDFLAGS"
-
-		ret_ldflags=0
-		for check_ldflags in $LDFLAGS
-		do
-			test -z "$IPCALC_LDFLAGS" && break
-	
-			if test "$check_ldflags" = "$IPCALC_LDFLAGS"; then
-				ret_ldflags=1
-				break
-			fi
-		done
-
-		test $ret_ldflags -eq 0 && LDFLAGS="$IPCALC_LDFLAGS $LDFLAGS"
-
-		#
-		# ipcalc header check
-		#
-		IPCALC_INCLUDES="`$ipcalcconfig --includes 2> /dev/null`"
-		if test -z "$IPCALC_INCLUDES"; then
-			IPCALC_INCLUDES="`$ipcalcconfig --defs 2> /dev/null`"
-		fi
-
-		ret_cppflags=0
-		for check_cppflags in $CPPFLAGS
-		do
-			test -z "$IPCALC_INCLUDES" && break
-
-			if test "$check_cppflags" = "$IPCALC_INCLUDES"; then
-				ret_cppflags=1
-				break
-			fi
-		done
-		test $ret_cppflags -eq 0 && CPPFLAGS="$IPCALC_INCLUDES $CPPFLAGS"
-		AC_CHECK_HEADERS(ipcalc@COMPAT_VERSION@.h)
-		if test "$ac_cv_header_ipcalc@COMPAT_VERSION@_h" != "yes"; then
-			AC_MSG_ERROR([You must need ipcalc@COMPAT_VERSION@.h header file])
+	else
+		if test $ipcalc@COMPAT_VERSION@_check_failed -eq 1; then
+			AC_MSG_ERROR([--without-ipcalc@COMPAT_VERSION@ doesn't permit])
 		fi
 	fi
 ])
