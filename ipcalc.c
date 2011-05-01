@@ -1,14 +1,34 @@
 /*
- * $Id: ipcalc.c,v 1.1.1.1 2010-08-07 16:27:49 oops Exp $
+ *  Copyright (C) 2011 JoungKyun.Kim <http://oops.org/>
+ *
+ *  This file is part of libipcalc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * $Id$
  */
 
-/*
- * IPCALC (IP calculationg and subnetting library)
+/**
+ * @file	ipcalc.c
+ * @brief	IP calculating and subnetting library
  *
  * This library support API for IP calculating and subnetting.
- * License: LGPL
  *
- * Copyright (c) 2010 JoungKyun.Kim <http://oops.org>
+ * @author	JoungKyun.Kim <http://oops.org>
+ * $Date$
+ * $Revision$
+ * @attention   Copyright (c) 2011 JoungKyun.Kim all rights reserved.
  */
 
 #ifdef HAVE_CONFIG_H

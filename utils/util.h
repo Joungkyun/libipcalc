@@ -1,5 +1,5 @@
 /*
- * $Id: util.h,v 1.2 2010-08-07 17:10:14 oops Exp $
+ * $Id$
  */
 #ifndef UTILAPI_H
 #define UTILAPI_H
