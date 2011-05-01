@@ -6,6 +6,10 @@
 
 #include <sys/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * check valid ip
  */
@@ -61,6 +65,11 @@ extern ulong network (ulong ip, ulong mask);
  * return network
  */
 extern ulong broadcast (ulong ip, ulong mask);
+
+
+#ifdef __cplusplus
+};
+#endif
 
 #endif
 
