@@ -1,5 +1,5 @@
 /*
- * $Id: ipcalc.h,v 1.3 2010-11-04 09:34:59 oops Exp $
+ * $Id$
  */
 #ifndef IPCALC_H
 #define IPCALC_H

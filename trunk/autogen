@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: autogen,v 1.1.1.1 2010-08-07 16:27:49 oops Exp $
+# $Id$
 # require autoconf > 2.59 & automake > 1.8
 
 export LIBTOOL=/usr/bin/libtool

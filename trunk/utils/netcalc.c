@@ -1,5 +1,5 @@
 /*
- * $Id: netcalc.c,v 1.1.1.1 2010-08-07 16:27:49 oops Exp $
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
