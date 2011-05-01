@@ -4,6 +4,9 @@ $Id$
 
 * 1.0.1
 
+Mon, May  2 2011 JoungKyun.Kim <http://oops.org>
+	- add 'extern C' for C plus plus
+
 Sat, Apr 30 2011 JoungKyun.Kim <http://oops.org>
 	- enhanced ipcalc.m4
 
