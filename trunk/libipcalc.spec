@@ -73,8 +73,8 @@ and subnetting IP address.
 
 %files utils
 %defattr(0644,root,root,0755)
-%{_bindir}/ip2long%{?compat}
-%{_bindir}/netcalc%{?compat}
+%attr(0755,root,root) %{_bindir}/ip2long%{?compat}
+%attr(0755,root,root) %{_bindir}/netcalc%{?compat}
 %{_datadir}/aclocal/*.m4
 %{!?compat:%{_mandir}/man1/*.1*}
 %{!?compat:%{_mandir}/ko/man1/*.1*}
