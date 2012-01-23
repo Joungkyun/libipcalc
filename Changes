@@ -2,7 +2,7 @@ Changelog
 
 $Id$
 
-* 1.0.1
+* 1.0.2
 
 Mon, May  2 2011 JoungKyun.Kim <http://oops.org>
 	- add 'extern C' for C plus plus
@@ -12,6 +12,11 @@ Sat, Apr 30 2011 JoungKyun.Kim <http://oops.org>
 
 Mon, Apr 18 2011 JoungKyun.Kim <http://oops.org>
 	- changed automake environments
+
+* 1.0.1
+
+Tue, Jan 11 2011 JoungKyun.Kim <http://oops.org>
+	- release 1.0.1
 
 Mon, Jan 10 2011 JoungKyun.Kim <http://oops.org>
 	- add rpm/deb package environments
