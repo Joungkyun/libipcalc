@@ -38,8 +38,8 @@
 	#endif
 #endif
 
-#define IPCALC_VERSION "1.0.1-dev"
-#define IPCALC_UVERSION "001000001-dev"
+#define IPCALC_VERSION "1.0.2-dev"
+#define IPCALC_UVERSION "001000002-dev"
 
 #endif
 
