@@ -21,7 +21,7 @@ Description: Header and object files for development using libipcalc
  The libipcalc-dev package contains the header and object
  files necessary for developing programs
 
-Package: ipcalc-utils
+Package: libipcalc-utils
 Section: utils
 Architecture: i386 amd64
 Depends: ${shlibs:Depends}, libipcalc1
