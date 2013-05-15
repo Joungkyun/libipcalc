@@ -4,6 +4,9 @@ $Id$
 
 * 1.0.2
 
+Wed, May 15 2013 JoungKyun.Kim <http://oops.org>
+	- changed debian pkg name ipcalc-utils to libipcalc-utils
+
 Tue, Sep 18 2012 JoungKyun.Kim <http://oops.org>
 	- fixed cygwin compile error
 
