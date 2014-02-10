@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libipcalc@COMPAT_VERSION@
+Description: IP calculating and subnetting
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lipcalc@COMPAT_VERSION@
+Cflags: -I${includedir} @CFLAGS@

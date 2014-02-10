@@ -1,0 +1,49 @@
+.TH LONG2PREFIX 3 "10 Jan 2011"
+
+.SH NAME
+.BI long2prefix
+\- Converts long netmask to decimical prefix.
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "short long2prefix (ulong " mask ");"
+
+.SH DESCRIPTION
+.BI long2prefix
+api converts long netmask to decimical prefix
+from ipcalc from initscripts on redhat
+
+.SH "RETURN VALUE"
+.PP
+cidr prefix value that has short casting
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    long mask = guess_netmask ('1.1.1.1', '1.1.1.10');
+    ulong r;
+
+    r = long2prefix (mask);
+    printf ("Network Prefix: %d\n", r);
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
+
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1
+
+.SH SEE ALSO
+guess_netmask(3), prefix2long(3)

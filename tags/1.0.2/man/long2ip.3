@@ -1,0 +1,68 @@
+.TH LONG2IP 3 "10 Jan 2011"
+
+.SH NAME
+long2ip \- convert Long IP to (IPv4) ip address.
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "char * long2ip (ulong " longip ");"
+.br
+.BI "char * long2ip_r (ulong " longip ", char * " dest ");"
+.PP
+.SH DESCRIPTION
+.BI long2ip
+api converts IPv4 ip address to unsigned long type.
+.PP
+.BI long2ip
+api converts IPv4 address into a string in Internet standard
+dotted format. The string is returned in a statically allocated
+buffer, which subsequent calls will overwrite.
+.PP
+For thread safe problem of
+.BI long2ip,
+.BI long2_ip_r
+is supported. See also follow examples.
+
+.SH "RETURN VALUE"
+.PP
+On success, return
+.BI "IPv4"
+address, on failes returns
+.BI "0.0.0.0".
+.br
+Return value of
+.BI long2ip_r
+is same value that allocated to 2th arguments
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    ulong addr = 3232235521;
+    char * ip;
+    char buf[16];
+
+    ip = long2ip (addr);
+    printf ("%s IPv4 addr: %s\\n", addr, ip);
+
+    long2ip_r (addr, buf);
+    printf ("%s IPv4 addr: %s\\n, addr, buf);
+    printf ("%s IPv4 addr: %s\\n", addr, long2ip_r (addr));
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
+
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1

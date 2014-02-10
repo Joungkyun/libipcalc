@@ -1,0 +1,48 @@
+.TH IP2LONG 3 "10 Jan 2011"
+
+.SH NAME
+ip2long \- convert IPv4 ip address to long type
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "ulong ip2long (char * " ipaddress ");"
+
+.SH DESCRIPTION
+.BI ip2long
+api converts a string containing an (IPv4) Internet Protocol
+dotted address into a proper address
+
+.SH "RETURN VALUE"
+.PP
+If success, returns
+.BI "unsigned long"
+format value, and  on fails, returns
+.BI 0
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    char * addr = "192.168.0.1";
+    ulong r;
+
+    r = ip2long (addr);
+    printf ("LONG IP: %ld\n", r);
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
+
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1

@@ -1,0 +1,41 @@
+Changelog
+
+$Id$
+
+* 1.0.2
+
+Tue, Feb 11 2014 JoungKyun.Kim <http://oops.org>
+	- fixed build error and shared library on cygwin
+	- release 1.0.2
+
+Wed, May 15 2013 JoungKyun.Kim <http://oops.org>
+	- changed debian pkg name ipcalc-utils to libipcalc-utils
+
+Tue, Sep 18 2012 JoungKyun.Kim <http://oops.org>
+	- fixed cygwin compile error
+
+Mon, May  2 2011 JoungKyun.Kim <http://oops.org>
+	- add 'extern C' for C plus plus
+
+Sat, Apr 30 2011 JoungKyun.Kim <http://oops.org>
+	- enhanced ipcalc.m4
+
+Mon, Apr 18 2011 JoungKyun.Kim <http://oops.org>
+	- changed automake environments
+
+* 1.0.1
+
+Tue, Jan 11 2011 JoungKyun.Kim <http://oops.org>
+	- release 1.0.1
+
+Mon, Jan 10 2011 JoungKyun.Kim <http://oops.org>
+	- add rpm/deb package environments
+
+Thu, Otc  4 2010 JoungKyun.Kim <http://oops.org>
+	- fixed build environments on other OS (ulong type, make command)
+	- start 1.0.1 dev tree
+
+* 1.0.0
+
+Sun, Aug 08 2010 JoungKyun.Kim <http://oops.org>
+	- release 1.0.0

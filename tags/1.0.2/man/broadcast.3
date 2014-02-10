@@ -1,0 +1,50 @@
+.TH BROADCAST 3 "10 Jan 2011"
+
+.SH NAME
+broadcast \- returns broadcast address with IP and network mask
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "char * broadcast (ulong " ip ", ulong " mask ");"
+
+.SH DESCRIPTION
+.BI broadcast
+.BI boradcast
+API returns broadcast address of subnet using with ip address and network mask
+
+.SH "RETURN VALUE"
+.BI "unsigned long"
+format value, and  on fails, returns
+.BI 0
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    char * ip = "192.168.10.131";
+    char * mask = "255.255.255.192";
+    ulong r;
+
+    r = broadcast (ip2long (ip), ip2long (mask));
+    printf ("BROADCAST ADDRESS: %s\n", long2ip (r));
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to QnA bulletin board of http://oops.org
+
+.SH COPYRIGHT
+Copyright (c) 2011 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1
+
+.SH SEE ALSO
+guess_netmask(3), network(3)

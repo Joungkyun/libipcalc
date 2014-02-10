@@ -1,0 +1,30 @@
+Source: libipcalc
+Priority: optional
+Maintainer: JoungKyun Kim (OOPS Development) <admin@oops.org>
+Build-Depends: debhelper (>= 7.0.50~), autotools-dev, chrpath
+Standards-Version: 3.9.1.0
+Section: libs
+Homepage: http://oops.org/
+
+Package: libipcalc1
+Section: libs
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: IP calculating and subnetting shared library
+ This library support API for IP calculating and subnetting.
+
+Package: libipcalc-dev
+Section: libdevel
+Architecture: i386 amd64
+Depends: libipcalc1
+Description: Header and object files for development using libipcalc
+ The libipcalc-dev package contains the header and object
+ files necessary for developing programs
+
+Package: libipcalc-utils
+Section: utils
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}, libipcalc1
+Description: IP calculating and subnetting utility
+ ipcalc-utils package contains two utilities for calculating (netcal)
+ and subnetting IP address (ip2long).
