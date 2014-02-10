@@ -3,7 +3,7 @@
 
 Summary: IP calculating and subnetting library
 Name: libipcalc%{?compat}
-Version: @PACKAGE_VERSION@
+Version: 1.0.2
 Release: 1
 Epoch: 1
 License: LGPL
@@ -80,6 +80,6 @@ and subnetting IP address.
 %{!?compat:%{_mandir}/ko/man1/*.1*}
 
 %changelog
-* @PACKAGE_DATE@ JoungKyun.Kim <http://oops.org> @PACKAGE_VERSION@-1
-- release @PACKAGE_VERSION@
+* Tue Feb 11 2014 JoungKyun.Kim <http://oops.org> 1.0.2-1
+- release 1.0.2
 
