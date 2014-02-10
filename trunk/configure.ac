@@ -5,7 +5,7 @@
 
 #
 AC_PREREQ(2.59)
-AC_INIT([libipcalc], [1.0.1], [http://oops.org])
+AC_INIT([libipcalc], [1.0.2], [http://oops.org])
 AC_CONFIG_AUX_DIR([tools])
 AM_INIT_AUTOMAKE([-Wall -Werror -Wno-override foreign no-dependencies])
 AM_MAINTAINER_MODE
@@ -76,6 +76,7 @@ AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ul
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_STAT
+AX_DLL_EXPORT_CHECK
 
 AX_STATIC_BINDIR
 AC_CONFIG_FILES([
