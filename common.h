@@ -37,8 +37,8 @@
 	#endif
 #endif
 
-#define IPCALC_VERSION "1.0.2"
-#define IPCALC_UVERSION "001000002"
+#define IPCALC_VERSION "1.0.3"
+#define IPCALC_UVERSION "001000003"
 
 #endif
 

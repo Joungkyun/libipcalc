@@ -2,6 +2,9 @@ Changelog
 
 $Id$
 
+* 1.0.3
+
+
 * 1.0.2
 
 Tue, Feb 11 2014 JoungKyun.Kim <http://oops.org>
@@ -23,6 +26,7 @@ Sat, Apr 30 2011 JoungKyun.Kim <http://oops.org>
 Mon, Apr 18 2011 JoungKyun.Kim <http://oops.org>
 	- changed automake environments
 
+
 * 1.0.1
 
 Tue, Jan 11 2011 JoungKyun.Kim <http://oops.org>
@@ -34,6 +38,7 @@ Mon, Jan 10 2011 JoungKyun.Kim <http://oops.org>
 Thu, Otc  4 2010 JoungKyun.Kim <http://oops.org>
 	- fixed build environments on other OS (ulong type, make command)
 	- start 1.0.1 dev tree
+
 
 * 1.0.0
 
