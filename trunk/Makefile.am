@@ -85,5 +85,8 @@ install-data-hook:
 	mv $(DESTDIR)$(includedir)/ipcalc.h $(DESTDIR)$(includedir)/ipcalc@COMPAT_VERSION@.h
 endif
 
+distclean-local:
+	rm -rf autom4te.cache z
+
 test-install:
 	$(MAKE) DESTDIR=`pwd`/z install
