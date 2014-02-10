@@ -35,8 +35,9 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/ipcalc-utils.install \
 			debian/libipcalc-dev.dirs
 
-if ! COMPAT
 docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
+
+if ! COMPAT
 dist_doc_DATA = Changes README LICENSE
 endif
 

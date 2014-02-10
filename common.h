@@ -24,7 +24,7 @@
 #include <netdb.h>
 
 #if defined _WIN32 || defined __CYGWIN__
-	#ifdef DLL_EXPORT
+	#ifdef HAVE_DLL_EXPORT
 		#define IPCALC_API __declspec(dllexport)
 	#else
 		#define IPCALC_API __declspec(dllimport)
@@ -37,8 +37,8 @@
 	#endif
 #endif
 
-#define IPCALC_VERSION "1.0.2-dev"
-#define IPCALC_UVERSION "001000002-dev"
+#define IPCALC_VERSION "1.0.2"
+#define IPCALC_UVERSION "001000002"
 
 #endif
 
