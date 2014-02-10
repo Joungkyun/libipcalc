@@ -30,9 +30,9 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/changelog \
 			debian/copyright \
 			debian/libipcalc1.install \
-			debian/ipcalc-utils.dirs \
+			debian/libipcalc-utils.dirs \
 			debian/rules \
-			debian/ipcalc-utils.install \
+			debian/libipcalc-utils.install \
 			debian/libipcalc-dev.dirs
 
 docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
