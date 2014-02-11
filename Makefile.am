@@ -82,7 +82,7 @@ install-data-hook:
 endif
 
 distclean-local:
-	rm -rf autom4te.cache z
+	rm -rf autom4te.cache test-install
 
 test-install:
-	$(MAKE) DESTDIR=`pwd`/z install
+	$(MAKE) DESTDIR=`pwd`/test-install install
