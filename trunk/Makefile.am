@@ -61,7 +61,7 @@ SONAME_INFO     = @SONAME_INFO@
 SONAME_VERSION  = @SONAME_VERSION@
 
 AM_CFLAGS = -Wall
-AM_LDFLAGS = -version-info $(SONAME_INFO) @CYGWIN_DYN_LIB@
+AM_LDFLAGS = -version-info $(SONAME_INFO) @MINGW_CYGWIN_DYNLIB@
 
 include_HEADERS = ipcalc.h
 noinst_HEADERS = common.h
