@@ -907,6 +907,7 @@ static_bindir
 GCC_PATCH_VERSION
 GCC_MINOR_VERSION
 GCC_MAJOR_VERSION
+RPM_COMPAT_DEFINE
 COMPAT_VERSION'
 ac_subst_files=''
 ac_user_opts='
@@ -4226,6 +4227,35 @@ _ACEOF
     fi
   fi
 
+  # DLL_EXPORT check
+
+  HAVE_DLL_EXPORT=0
+  { $as_echo "$as_me:$LINENO: checking for DLL_EXPORT declarations" >&5
+$as_echo_n "checking for DLL_EXPORT declarations... " >&6; }
+
+  case $host_os in
+    mingw* | cygwin* | pw32* | os2* | cegcc*)
+      HAVE_DLL_EXPORT=1
+      case $host_os in
+        cygwin*)
+          LIBS="$LIBS -no-undefined"
+          ;;
+      esac
+      { $as_echo "$as_me:$LINENO: result: yes" >&5
+$as_echo "yes" >&6; }
+
+cat >>confdefs.h <<_ACEOF
+#define HAVE_DLL_EXPORT $HAVE_DLL_EXPORT
+_ACEOF
+
+      ;;
+    *)
+      { $as_echo "$as_me:$LINENO: result: no" >&5
+$as_echo "no" >&6; }
+      ;;
+  esac
+
+
 # Find a good install program.  We prefer a C program (faster),
 # so one script is as good as another.  But avoid the broken or
 # incompatible versions:
@@ -5105,13 +5135,13 @@ if test "${lt_cv_nm_interface+set}" = set; then
 else
   lt_cv_nm_interface="BSD nm"
   echo "int some_variable = 0;" > conftest.$ac_ext
-  (eval echo "\"\$as_me:5108: $ac_compile\"" >&5)
+  (eval echo "\"\$as_me:5138: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:5111: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
+  (eval echo "\"\$as_me:5141: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
   (eval "$NM \"conftest.$ac_objext\"" 2>conftest.err > conftest.out)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:5114: output\"" >&5)
+  (eval echo "\"\$as_me:5144: output\"" >&5)
   cat conftest.out >&5
   if $GREP 'External.*some_variable' conftest.out > /dev/null; then
     lt_cv_nm_interface="MS dumpbin"
@@ -6305,7 +6335,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 6308 "configure"' > conftest.$ac_ext
+  echo '#line 6338 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8537,11 +8567,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8540: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8570: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:8544: \$? = $ac_status" >&5
+   echo "$as_me:8574: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -8876,11 +8906,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8879: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8909: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:8883: \$? = $ac_status" >&5
+   echo "$as_me:8913: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -8981,11 +9011,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8984: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9014: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:8988: \$? = $ac_status" >&5
+   echo "$as_me:9018: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -9036,11 +9066,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9039: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9069: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9043: \$? = $ac_status" >&5
+   echo "$as_me:9073: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -11839,7 +11869,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11842 "configure"
+#line 11872 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11935,7 +11965,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11938 "configure"
+#line 11968 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -13955,11 +13985,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13958: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13988: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:13962: \$? = $ac_status" >&5
+   echo "$as_me:13992: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14054,11 +14084,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14057: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14087: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14061: \$? = $ac_status" >&5
+   echo "$as_me:14091: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -14106,11 +14136,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14109: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14139: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14113: \$? = $ac_status" >&5
+   echo "$as_me:14143: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15413,6 +15443,7 @@ $as_echo "$as_me: error: compat version is only numeric" >&2;}
 		{ $as_echo "$as_me:$LINENO: result: $with_compat" >&5
 $as_echo "$with_compat" >&6; }
 		COMPAT_VERSION=$with_compat
+		RPM_COMPAT_DEFINE="%define compat $COMPAT_VERSION"
 	fi
 	 if test "x$with_compat" != "x" && test "$with_compat" != "no"; then
   COMPAT_TRUE=
@@ -16860,26 +16891,6 @@ _ACEOF
 fi
 
 
-  HAVE_DLL_EXPORT=0
-  { $as_echo "$as_me:$LINENO: checking for DLL_EXPORT declarations" >&5
-$as_echo_n "checking for DLL_EXPORT declarations... " >&6; }
-  echo "$lt_prog_compiler_pic_CXX" | /bin/grep "DLL_EXPORT" > /dev/null 2>&1
-  if test $? -eq 0; then
-    { $as_echo "$as_me:$LINENO: result: yes" >&5
-$as_echo "yes" >&6; };
-    HAVE_DLL_EXPORT=1
-    LIBS="$LIBS -no-undefined"
-
-cat >>confdefs.h <<_ACEOF
-#define HAVE_DLL_EXPORT $HAVE_DLL_EXPORT
-_ACEOF
-
-  else
-    { $as_echo "$as_me:$LINENO: result: no" >&5
-$as_echo "no" >&6; };
-  fi
-
-
 
 	if test -n "`echo $bindir | grep exec_prefix`"; then
 		if test "$exec_prefix" = "$prefix"; then
@@ -16903,7 +16914,7 @@ $as_echo "no" >&6; };
 		static_bindir="$bindir"
 	fi
 
-ac_config_files="$ac_config_files Makefile man/Makefile scripts/Makefile scripts/ipcalc.pc scripts/ipcalc-config test/Makefile utils/Makefile m4/ipcalc.m4"
+ac_config_files="$ac_config_files Makefile man/Makefile scripts/Makefile scripts/ipcalc.pc scripts/ipcalc-config test/Makefile utils/Makefile m4/ipcalc.m4 libipcalc.spec"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17892,6 +17903,7 @@ do
     "test/Makefile") CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
     "utils/Makefile") CONFIG_FILES="$CONFIG_FILES utils/Makefile" ;;
     "m4/ipcalc.m4") CONFIG_FILES="$CONFIG_FILES m4/ipcalc.m4" ;;
+    "libipcalc.spec") CONFIG_FILES="$CONFIG_FILES libipcalc.spec" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
