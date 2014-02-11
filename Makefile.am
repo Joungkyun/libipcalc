@@ -35,8 +35,7 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/libipcalc-utils.install \
 			debian/libipcalc-dev.dirs
 
-docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
-
+#docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 if ! COMPAT
 dist_doc_DATA = Changes README LICENSE
 endif
@@ -72,13 +71,10 @@ libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
 
 DISTCLEANFILES += *.bz2
 
+if COMPAT
 dist-hook:
-	$(PERL) -pi -e \
-			"s/\@PACKAGE_VERSION\@/$(VERSION)/g" \
-			$(distdir)/$(PACKAGE).spec
-	$(PERL) -pi -e \
-			"s/\@PACKAGE_DATE\@/$(PACKAGE_DATE)/g" \
-			$(distdir)/$(PACKAGE).spec
+	mv $(distdir)/libipcalc.spec $(distdir)/libipcalc@COMPAT_VERSION@.spec
+endif
 
 if COMPAT
 install-data-hook:

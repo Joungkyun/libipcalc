@@ -88,5 +88,6 @@ AC_CONFIG_FILES([
 	test/Makefile
 	utils/Makefile
 	m4/ipcalc.m4
+	libipcalc.spec
 ])
 AC_OUTPUT
