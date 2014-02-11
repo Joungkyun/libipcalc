@@ -266,7 +266,7 @@ build_vendor = @build_vendor@
 builddir = @builddir@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
+docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host = @host@
@@ -315,6 +315,8 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/libipcalc-utils.install \
 			debian/libipcalc-dev.dirs
 
+
+#docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 @COMPAT_FALSE@dist_doc_DATA = Changes README LICENSE
 m4dir = $(datadir)/aclocal
 dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4

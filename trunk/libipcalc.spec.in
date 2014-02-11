@@ -1,5 +1,5 @@
 %define _unpackaged_files_terminate_build 0
-#define compat 10
+@RPM_COMPAT_DEFINE@
 
 Summary: IP calculating and subnetting library
 Name: libipcalc%{?compat}
