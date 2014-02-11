@@ -76,7 +76,6 @@ AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ul
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_STAT
-AX_DLL_EXPORT_CHECK
 
 AX_STATIC_BINDIR
 AC_CONFIG_FILES([

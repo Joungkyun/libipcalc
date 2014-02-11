@@ -60,10 +60,11 @@ subdir = .
 DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
 	$(dist_m4_DATA) $(include_HEADERS) $(noinst_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/ipcalc-config.h.in $(top_srcdir)/configure \
-	$(top_srcdir)/m4/ipcalc.m4.in acconfig.h tools/config.guess \
-	tools/config.rpath tools/config.sub tools/install-sh \
-	tools/ltmain.sh tools/missing
+	$(srcdir)/ipcalc-config.h.in $(srcdir)/libipcalc.spec.in \
+	$(top_srcdir)/configure $(top_srcdir)/m4/ipcalc.m4.in \
+	acconfig.h tools/config.guess tools/config.rpath \
+	tools/config.sub tools/install-sh tools/ltmain.sh \
+	tools/missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_compat_option.m4 \
 	$(top_srcdir)/m4/ax_gcc_visibiliity.m4 \
@@ -77,7 +78,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = ipcalc-config.h
-CONFIG_CLEAN_FILES = m4/ipcalc.m4
+CONFIG_CLEAN_FILES = m4/ipcalc.m4 libipcalc.spec
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -237,6 +238,7 @@ PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PERL = @PERL@
 RANLIB = @RANLIB@
+RPM_COMPAT_DEFINE = @RPM_COMPAT_DEFINE@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -385,6 +387,8 @@ $(srcdir)/ipcalc-config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) $(top
 distclean-hdr:
 	-rm -f ipcalc-config.h stamp-h1
 m4/ipcalc.m4: $(top_builddir)/config.status $(top_srcdir)/m4/ipcalc.m4.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+libipcalc.spec: $(top_builddir)/config.status $(srcdir)/libipcalc.spec.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
@@ -638,6 +642,7 @@ GTAGS:
 
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
+@COMPAT_FALSE@dist-hook:
 
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
@@ -957,13 +962,8 @@ uninstall-am: uninstall-dist_docDATA uninstall-dist_m4DATA \
 @COMPAT_TRUE@m4/ipcalc@COMPAT_VERSION@.m4:
 @COMPAT_TRUE@	mv m4/ipcalc.m4 m4/ipcalc@COMPAT_VERSION@.m4
 
-dist-hook:
-	$(PERL) -pi -e \
-			"s/\@PACKAGE_VERSION\@/$(VERSION)/g" \
-			$(distdir)/$(PACKAGE).spec
-	$(PERL) -pi -e \
-			"s/\@PACKAGE_DATE\@/$(PACKAGE_DATE)/g" \
-			$(distdir)/$(PACKAGE).spec
+@COMPAT_TRUE@dist-hook:
+@COMPAT_TRUE@	mv $(distdir)/libipcalc.spec $(distdir)/libipcalc@COMPAT_VERSION@.spec
 
 @COMPAT_TRUE@install-data-hook:
 @COMPAT_TRUE@	mv $(DESTDIR)$(includedir)/ipcalc.h $(DESTDIR)$(includedir)/ipcalc@COMPAT_VERSION@.h
