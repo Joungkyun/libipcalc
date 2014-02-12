@@ -68,6 +68,7 @@ noinst_HEADERS = common.h
 
 lib_LTLIBRARIES = libipcalc@COMPAT_VERSION@.la
 libipcalc@COMPAT_VERSION@_la_SOURCES = ipcalc.c
+libipcalc@COMPAT_VERSION@_la_LIBADD = @MING_WS2_32_LIBS@
 
 DISTCLEANFILES += *.bz2
 

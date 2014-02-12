@@ -81,6 +81,14 @@ AC_CHECK_TYPE([ulong], [AC_DEFINE([C_ULONG_DEFINED], [1], [Define to 1 if the ul
 AC_FUNC_MALLOC
 AC_FUNC_STAT
 
+case $host_os in
+  mingw*)
+    AC_DEFINE(HAVE_LIBWS2_32, 1, [Define to 1 if you have the 'ws2_32' library (-lws2_32).])
+    AC_SUBST(MING_WS2_32_LIBS)
+	MING_WS2_32_LIBS="-lws2_32"
+	;;
+esac
+
 AX_STATIC_BINDIR
 AC_CONFIG_FILES([
 	Makefile
