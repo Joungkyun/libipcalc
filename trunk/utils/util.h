@@ -45,6 +45,12 @@ void safecpy (char *stor, char *str, int size) {
 	stor[size] = 0;
 }
 
+#ifdef _WIN32
+	#define IPCALC_WSACleanup WSACleanup()
+#else
+	#define IPCALC_WSACleanup
+#endif
+
 #endif
 
 /*

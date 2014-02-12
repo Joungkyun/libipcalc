@@ -61,6 +61,10 @@ AX_COMPAT_OPTION
 # Checks for libraries.
 AC_CHECK_LIB(dl, dlopen,,)
 
+if test "x$lt_prog_compiler_pic" = "x-DDLL_EXPORT"; then
+	LIBS="$LIBS -no-undefined"
+fi
+
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/socket.h stdbool.h getopt.h])

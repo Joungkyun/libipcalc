@@ -133,6 +133,19 @@ int main (int argc, char ** argv) {
 		return 1;
 	}
 
+#ifdef _WIN32
+	{
+		WORD wVerReq = MAKEWORD (2, 2); // WinSock 2.2 요청
+		WSADATA wsaData;
+		int nErrStatus;
+
+		if ( (nErrStatus = WSAStartup (wVerReq, &wsaData)) != 0 ) {
+			fprintf (stderr, "ERROR: Failed initialize WSAStart\n");
+			return 1;
+		}
+	}
+#endif
+
 	if ( optno == 1 ) {
 		/*
 		 * Case IP/Prefix or IP/Netmask
@@ -144,6 +157,7 @@ int main (int argc, char ** argv) {
 		if ( (mask = strchr (ip, '/')) == NULL ) {
 			fprintf (stderr, "ERROR: %s format is IPADDRESS/[NETMASK|PREFIX]\n", argv[1]);
 			usage (PNAME);
+			IPCALC_WSACleanup;
 			return 1;
 		}
 		safecpy (_mask, mask + 1, 256);
@@ -151,6 +165,7 @@ int main (int argc, char ** argv) {
 
 		if ( valid_ip_address (ip, err) ) {
 			fprintf (stderr, "ERROR: %s -> %s\n", ip, err);
+			IPCALC_WSACleanup;
 			return 1;
 		}
 		r.start = ip2long (ip);
@@ -158,6 +173,7 @@ int main (int argc, char ** argv) {
 		if ( strchr (_mask, '.') ) {
 			if ( valid_ip_address (_mask, err) ) {
 				fprintf (stderr, "ERROR: %s -> %s\n", _mask, err);
+				IPCALC_WSACleanup;
 				return 1;
 			}
 
@@ -170,6 +186,7 @@ int main (int argc, char ** argv) {
 						"ERROR: %s is overflow or underflow on prefix range.\n",
 						_mask
 				);
+				IPCALC_WSACleanup;
 				return 1;
 			}
 			r.mask = prefix2long (r.prefix);
@@ -190,12 +207,14 @@ int main (int argc, char ** argv) {
 				argv[optind + 1]
 			);
 			usage (PNAME);
+			IPCALC_WSACleanup;
 			return 1;
 		}
 
 		safecpy (ip, argv[optind], 256);
 		if ( valid_ip_address (ip, err) ) {
 			fprintf (stderr, "ERROR: %s -> %s\n", ip, err);
+			IPCALC_WSACleanup;
 			return 1;
 		}
 		r.start = ip2long (ip);
@@ -203,6 +222,7 @@ int main (int argc, char ** argv) {
 		safecpy (ip, argv[optind + 1], 256);
 		if ( valid_ip_address (ip, err) ) {
 			fprintf (stderr, "ERROR: %s -> %s\n", ip, err);
+			IPCALC_WSACleanup;
 			return 1;
 		}
 		r.end = ip2long (ip);
@@ -254,6 +274,8 @@ int main (int argc, char ** argv) {
 
 		printf ("%d\n", r.prefix);
 	}
+
+	IPCALC_WSACleanup;
 
 	return 0;
 }

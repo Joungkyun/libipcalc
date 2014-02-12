@@ -4,6 +4,10 @@ $Id$
 
 * 1.0.3
 
+Thu, Feb 13 2014 JoungKyun.Kim <http://oops.org>
+	- support native window library and binaries with MinGW
+	- add Code::Block workspace
+
 
 * 1.0.2
 

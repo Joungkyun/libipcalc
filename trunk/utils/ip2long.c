@@ -71,9 +71,23 @@ int main (int argc, char ** argv) {
 	safecpy (ip, argv[optind], 256);
 	input = (strchr (ip, '.') != NULL) ? IPv4 : LONGIP;
 
+#ifdef _WIN32
+	{
+		WORD wVerReq = MAKEWORD (2, 2); // WinSock 2.2 요청
+		WSADATA wsaData;
+		int nErrStatus;
+
+		if ( (nErrStatus = WSAStartup (wVerReq, &wsaData)) != 0 ) {
+			fprintf (stderr, "ERROR: Failed initialize WSAStart\n");
+			return 1;
+		}
+	}
+#endif
+
 	strcpy (oip, ip);
 	if ( valid_ip_address (ip, err) ) {
 		fprintf (stderr, "ERROR: %s -> %s\n", oip, err);
+		IPCALC_WSACleanup;
 		return 1;
 	}
 
@@ -86,6 +100,8 @@ int main (int argc, char ** argv) {
 		printf ("LONGIP : ");
 	if ( verbose || input == IPv4 )
 		printf ("%lu\n", ip2long (ip));
+
+	IPCALC_WSACleanup;
 
 	return 0;
 }
