@@ -15,8 +15,8 @@
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add directory="../utils" />
-					<Add directory="." />
 					<Add directory=".." />
+					<Add directory="." />
 				</Compiler>
 				<Linker>
 					<Add library="..\MingW\bin\Debug\libipcalc.a" />
@@ -31,6 +31,9 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
+					<Add directory="../utils" />
+					<Add directory=".." />
+					<Add directory="." />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

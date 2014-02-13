@@ -15,11 +15,11 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-Wall" />
-					<Add option="-DHAVE_DLL_EXPORT" />
 					<Add option="-g" />
+					<Add option="-DHAVE_DLL_EXPORT" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="ws2_32" />
 				</Linker>
 			</Target>
@@ -31,20 +31,22 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-O2" />
 					<Add option="-Wall" />
 					<Add option="-DHAVE_DLL_EXPORT" />
-					<Add option="-O2" />
+					<Add directory=".." />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="user32" />
 					<Add library="ws2_32" />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="../ipcalc.c" />
-		<Unit filename="../ipcalc.h" />
 		<Unit filename="../common.h" />
+		<Unit filename="../ipcalc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ipcalc.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
