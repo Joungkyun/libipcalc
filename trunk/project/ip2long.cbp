@@ -37,7 +37,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="..\MingW\bin\Debug\libipcalc.a" />
+					<Add library="..\MingW\bin\Release\libipcalc.a" />
 					<Add library="ws2_32" />
 				</Linker>
 			</Target>
