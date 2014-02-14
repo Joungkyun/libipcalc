@@ -317,7 +317,11 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 			debian/libipcalc-utils.dirs \
 			debian/rules \
 			debian/libipcalc-utils.install \
-			debian/libipcalc-dev.dirs
+			debian/libipcalc-dev.dirs \
+			project/libipcalc.workspace \
+			project/library.cbp \
+			project/netcalc.cbp \
+			project/ip2long.cbp
 
 
 #docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
