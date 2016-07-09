@@ -12,7 +12,7 @@ long2ip \- Long IP를 (IPv4) ip 주소로 변환
 .PP
 .SH 설명
 .BI long2ip
-API는 Long IP(unsigned long type)을 (IPv4) 인터넷 주소(ip address)로 변환을 한다.
+API는 Long IP(32bit 양수)을 (IPv4) 인터넷 주소(ip address)로 변환을 한다.
 .PP
 .BI long2ip
 API는 정적으로 할당된 버퍼를 반환하기 때문에, 다음에 호출될 때 이 버퍼를
@@ -44,16 +44,16 @@ API의 사용법은
 #include <ipcalc.h>
 
 int main (void) {
-    ulong addr = 3232235521;
+    ulong addr = 3232235521UL;
     char * ip;
     char buf[16];
 
     ip = long2ip (addr);
     printf ("%s IPv4 addr: %s\\n", addr, ip);
 
-    long2ip_r (addr, buf);
-    printf ("%s IPv4 addr: %s\\n, addr, buf);
-    printf ("%s IPv4 addr: %s\\n", addr, long2ip_r (addr));
+    ip = long2ip_r (addr, buf);
+    printf ("%s IPv4 addr: %s\\n", addr, ip);
+    printf ("%s IPv4 addr: %s\\n", addr, buf);
 
     return 0;
 }

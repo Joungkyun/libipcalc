@@ -7,18 +7,19 @@
 .SH SYNOPSIS
 .BI "#include <ipcalc.h>"
 .br
-.BI "ulong prefix2long (char * " prefix ");"
+.BI "ulong prefix2long (short * " prefix ");"
 
 .SH DESCRIPTION
 .BI prefix2long
-api converts network prefix to long mask.
+api converts network prefix to 32bit positive integer mask.
 
 .SH "RETURN VALUE"
 .PP
-If success, returns
-.BI "unsigned long"
-format value, and  on fails, returns
+return
+.BI "32 bit positive integer"
+on success, and returns
 .BI 0
+on fails.
 
 .SH EXAMPLE
 .nf

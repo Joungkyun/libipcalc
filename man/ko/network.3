@@ -6,7 +6,7 @@ network \- IP와 network mask를 이용하여 network address를 반환
 .SH 사용법
 .BI "#include <ipcalc.h>"
 .br
-.BI "char * network (ulong " ip ", ulong " mask ");"
+.BI "unsigned long network (ulong " ip ", ulong " mask ");"
 
 .SH 설명
 .BI network
@@ -14,7 +14,9 @@ API는 IP 주소와 network mask를 이용하여 IP가 포함된 subnet의 netwo
 
 .SH 반환값
 .PP
-unsigned long 형식의 IP 주소 반환하며, 실패시에
+성공 시에
+.BI "32bit 정수"
+를 반환하며, 실패 시에
 .BI 0
 을 반환한다.
 
@@ -48,4 +50,4 @@ Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
 을 따르며, 사용시의 어떠한 문제에 대하여 보증하지 않는다.
 
 .SH 참조
-guess_netmask(3), broadcast(3)
+broadcast(3), ip2long(3), long2ip(3)

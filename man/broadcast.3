@@ -6,17 +6,18 @@ broadcast \- returns broadcast address with IP and network mask
 .SH SYNOPSIS
 .BI "#include <ipcalc.h>"
 .br
-.BI "char * broadcast (ulong " ip ", ulong " mask ");"
+.BI "unsigned long broadcast (ulong " ip ", ulong " mask ");"
 
 .SH DESCRIPTION
-.BI broadcast
 .BI boradcast
 API returns broadcast address of subnet using with ip address and network mask
 
 .SH "RETURN VALUE"
-.BI "unsigned long"
-format value, and  on fails, returns
+return
+.BI "32 bit positive integer"
+on success, and returns
 .BI 0
+on fails.
 
 .SH EXAMPLE
 .nf

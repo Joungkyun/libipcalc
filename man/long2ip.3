@@ -1,7 +1,7 @@
 .TH LONG2IP 3 "09 Jul 2016"
 
 .SH NAME
-long2ip \- convert Long IP to (IPv4) ip address.
+long2ip \- convert Long IP(32bit positive integer) to IPv4 dotted ip address.
 
 .SH SYNOPSIS
 .BI "#include <ipcalc.h>"
@@ -12,7 +12,7 @@ long2ip \- convert Long IP to (IPv4) ip address.
 .PP
 .SH DESCRIPTION
 .BI long2ip
-api converts IPv4 ip address to unsigned long type.
+api converts 32 bit positive integer to IPv4 dotted ip address.
 .PP
 .BI long2ip
 api converts IPv4 address into a string in Internet standard
@@ -40,16 +40,16 @@ is same value that allocated to 2th arguments
 #include <ipcalc.h>
 
 int main (void) {
-    ulong addr = 3232235521;
+    ulong addr = 3232235521UL;
     char * ip;
     char buf[16];
 
     ip = long2ip (addr);
     printf ("%s IPv4 addr: %s\\n", addr, ip);
 
-    long2ip_r (addr, buf);
-    printf ("%s IPv4 addr: %s\\n, addr, buf);
-    printf ("%s IPv4 addr: %s\\n", addr, long2ip_r (addr));
+    ip = long2ip_r (addr, buf);
+    printf ("%s IPv4 addr: %s\\n", addr, ip);
+    printf ("%s IPv4 addr: %s\\n", addr, buf);
 
     return 0;
 }

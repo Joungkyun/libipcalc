@@ -7,17 +7,17 @@
 .SH 사용법
 .BI "#include <ipcalc.h>"
 .br
-.BI "ulong prefix2long (char * " prefix ");"
+.BI "ulong prefix2long (short * " prefix ");"
 
 .SH 설명
 .BI prefix2long
-API는 10진수 네트워크 prefix를 unsigned long 형으로 변환을 한다.
+API는 10진수 네트워크 prefix를 32bit 양수로 변환을 한다.
 
 .SH 반환값
 .PP
-성공시에
-.BI "unsigned long"
-값을 반환하며, 실패시에
+성공 시에
+.BI "32bit 정수"
+를 반환하며, 실패 시에
 .BI 0
 을 반환한다.
 

@@ -6,7 +6,7 @@ broadcast \- IP와 network mask를 이용하여 broadcast address를 반환
 .SH 사용법
 .BI "#include <ipcalc.h>"
 .br
-.BI "char * broadcast (ulong " ip ", ulong " mask ");"
+.BI "unsigned long broadcast (ulong " ip ", ulong " mask ");"
 
 .SH 설명
 .BI broadcast
@@ -14,7 +14,9 @@ API는 IP 주소와 network mask를 이용하여 IP가 포함된 subnet의 broad
 
 .SH 반환값
 .PP
-unsigned long 형식의 IP 주소 반환하며, 실패시에
+성공 시에
+.BI "32bit 정수"
+를 반환하며, 실패 시에
 .BI 0
 을 반환한다.
 

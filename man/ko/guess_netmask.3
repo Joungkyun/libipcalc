@@ -1,12 +1,12 @@
 .TH NETMASK 3 "09 Jul 2016"
 
 .SH 이름
-guess_netmask \- Long IP를 (IPv4) ip 주소로 변환
+guess_netmask \- 지정한 IP 범위를 포함하는 최소의 subnet mask를 구한다.
 
 .SH 사용법
 .BI "#include <ipcalc.h>"
 .br
-.BI "char * guess_netmask (ulong " start ", ulong " end ");"
+.BI "unsigned long:* guess_netmask (ulong " start ", ulong " end ");"
 
 .SH 설명
 .BI guess_netmask
@@ -14,9 +14,9 @@ guess_netmask \- Long IP를 (IPv4) ip 주소로 변환
 
 .SH 반환값
 .PP
-성공시에
-.BI "IPv4 주소"
-형식의 subnet mask long type으로 반환하며, 실패시에
+성공 시에
+.BI "32bit 정수"
+를 반환하며, 실패 시에
 .BI 0
 을 반환한다.
 

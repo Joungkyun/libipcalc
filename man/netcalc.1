@@ -9,21 +9,31 @@
 .BI "netcalc \-[abhmnps] " StartIP " " EndIP
 .SH DESCRIPTION
 .BI netcalc
-Not yet
+provides a simple way to calculate IP information for a host. The various
+options specify what information ipcalc should display on standard out.
+Multiple options may be specified. An IP address to operate on must always
+be specified. Most operations also require a netmask or a CIDR prefix as well.
 .PP
 .SH OPTIONS
 .IP "-a"
 sames -bmnp. print all options
 .IP "-b"
-print broadcast address
+print
+.BI "broadcast address"
 .IP "-m"
-print network mask address
+print
+.BI "subnet mask address"
 .IP "-n"
-print network address
+print
+.BI "network address"
 .IP "-p"
-print network prefix
+print
+.BI CIDR
+(network prefix)
 .IP "-s"
-print shell variable format
+print as
+.BI "shell variable"
+format
 .IP "-h"
 print help messages
 

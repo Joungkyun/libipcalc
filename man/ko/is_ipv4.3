@@ -22,6 +22,19 @@ argument를 도메인 이름으로 주었을 경우, 유효한 도메인일 경�
 .BI 1
 을 반환한다.
 
+.BI address
+값이 도메인 이름일 경우,
+.BI address
+의 값은
+.BI "IP 주소"
+로 변환이 된다.
+.BI address
+가 유효하지 않은 값일 경우,
+.BI address
+값은
+.BI NULL
+로 설정이 된다.
+
 .SH 예제
 .nf
 #include <ipcalc.h>

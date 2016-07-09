@@ -6,17 +6,17 @@ ip2long \- (IPv4) ip 주소를 Long IP로 변환
 .SH 사용법
 .BI "#include <ipcalc.h>"
 .br
-.BI "ulong ip2long (char * " ipaddress ");"
+.BI "unsigned long ip2long (char * " ipaddress ");"
 
 .SH 설명
 .BI ip2long
-API는 (IPv4) 인터넷 주소(ip address)를 Long IP(unsigned long type)로 변환을 한다.
+API는 (IPv4) 인터넷 주소(ip address)를 Long IP(32bit 양수)로 변환을 한다.
 
 .SH 반환값
 .PP
-성공시에
-.BI "unsigned long"
-값을 반환하며, 실패시에
+성공 시에
+.BI "32bit 정수"
+를 반환하며, 실패 시에
 .BI 0
 을 반환한다.
 
@@ -29,7 +29,7 @@ int main (void) {
     ulong r;
 
     r = ip2long (addr);
-    printf ("LONG IP: %ld\n", r);
+    printf ("LONG IP: %lu\n", r);
 
     return 0;
 }
