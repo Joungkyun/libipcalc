@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
+ *  Copyright (c) 2016 JoungKyun.Kim <http://oops.org/>. All rights reserved.
  *
  *  This file is part of libipcalc.
  *
@@ -24,8 +24,8 @@
  * This library support API for IP calculating and subnetting.
  *
  * @author	JoungKyun.Kim <http://oops.org>
- * $Date$
- * $Revision$
+ * $Date: $
+ * $Revision: $
  * @attention   Copyright (c) 2016 JoungKyun.Kim all rights reserved.
  */
 
@@ -149,11 +149,13 @@ IPCALC_API short long2prefix (ulong mask) { // {{{
 	return count;
 } // }}}
 
+
 /*
  * convert network prefix to long mask
- * from ipcalc from initscripts on redhat
+ *
+ * This is internal api and enable 32bit integer overflow!
  */
-IPCALC_API ulong prefix2long (short n) { // {{{
+ulong _prefix2long (short n) { // {{{
 	short	l = 32;
 	short   shift = 30;
 	ulong	v = 0;
@@ -171,6 +173,15 @@ IPCALC_API ulong prefix2long (short n) { // {{{
 	}
 
 	return v;
+} // }}}
+
+/*
+ * convert network prefix to long mask
+ */
+IPCALC_API ulong prefix2long (short n) { // {{{
+	ulong r = _prefix2long (n);
+
+	return (r > UINT_MAX) ? r % UINT_MAX : r;
 } // }}}
 
 /*
@@ -202,7 +213,7 @@ IPCALC_API short guess_prefix (ulong s, ulong e) { // {{{
 		if ( n > 0 )
 			prefix--;
 
-		n = broadcast (s, prefix2long (prefix));
+		n = broadcast (s, _prefix2long (prefix));
 	}
 
 	return prefix;

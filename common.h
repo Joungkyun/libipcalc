@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
+ *  Copyright (c) 2016 JoungKyun.Kim <http://oops.org/>. All rights reserved.
  *
  *  This file is part of libipcalc.
  *
@@ -63,6 +63,11 @@
 
 #define IPCALC_VERSION "1.0.3"
 #define IPCALC_UVERSION "001000003"
+
+#ifdef UINT_MAX
+	#undef UINT_MAX
+#endif
+#define UINT_MAX 4294967296U
 
 #endif
 

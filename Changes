@@ -2,6 +2,9 @@ Changelog
 
 * 1.0.3
 
+Sat, Jul 09 2016 JoungKyun.Kim <http://oops.og>
+	- fixed #1 prefix2long integer overflow on 64bit machine
+
 Thu, Feb 13 2014 JoungKyun.Kim <http://oops.org>
 	- support native window library and binaries with MinGW
 	- add Code::Block workspace
