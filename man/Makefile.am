@@ -20,15 +20,15 @@ if ! COMPAT
 EXTRA_DIST = ko/broadcast.3 ko/guess_netmask.3 ko/ip2long.3 \
 		   ko/long2ip.3 ko/long2prefix.3 ko/network.3 \
 		   ko/prefix2long.3 ko/valid_ip_address.3 \
-		   ko/ip2long.1 ko/netcalc.1
+		   ko/ip2long.1 ko/netcalc.1 ko/is_ipv4.3
 dist_man_MANS = ip2long.1 netcalc.1 broadcast.3 guess_netmask.3 \
 				ip2long.3 long2ip.3 long2prefix.3 network.3 \
-				prefix2long.3 valid_ip_address.3
+				prefix2long.3 valid_ip_address.3 is_ipv4.3
 
 ko_man1dir = $(mandir)/ko/man1
 ko_man1_DATA = ko/ip2long.1 ko/netcalc.1
 ko_man3dir = $(mandir)/ko/man3
 ko_man3_DATA = ko/broadcast.3 ko/guess_netmask.3 ko/ip2long.3 \
 			   ko/long2ip.3 ko/long2prefix.3 ko/network.3 \
-			   ko/prefix2long.3 ko/valid_ip_address.3
+			   ko/prefix2long.3 ko/valid_ip_address.3 ko/is_ipv4.3
 endif
