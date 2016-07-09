@@ -4,6 +4,7 @@ IPv4 Calculating and subnetting C/C++ APIs
 ## License
 
 Copyright &copy; 2016 JoungKyun.Kim &lt;http://oops.org&gt;. And all rights reserved
+
 LICENSE: [LGPL](/LICENSE)
 
 This library is forked in [libkrisp](https://github.com/Joungkyun/libkrisp).
