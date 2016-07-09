@@ -21,26 +21,56 @@
 #include <ipcalc.h>
 
 int main (void) {
-	const char	* ip = "10.0.0.4";
-	char		* rip;
-	ulong		longip;
-	int			ret = 0;
+	const char  * ip = "10.0.0.4";
+	ulong         lip = 167772164UL;
+	char        * rip;
+	ulong         longip;
+	int           ret = 0;
 
-	if ( (longip = ip2long (ip)) == 167772164UL )
-		printf ("PASS:    + ip2long (10.0.0.4 -> 167772164UL)\n");
+	if ( (longip = ip2long ((char *) ip)) == lip )
+		printf (
+			"PASS:    + ip2long (%s -> %lu)\n",
+			ip,
+			longip
+		);
 	else {
 		printf (
-			"FAIL:    + ip2long (10.0.0.4 == 167772164UL, but result is %ld)\n",
+			"FAIL:    + ip2long (%ip == %lu, but result is %lu)\n",
+			ip,
+			lip,
 			longip
 		);
 		ret = 1;
 	}
 
-	if ( strcmp ((rip = long2ip (167772164UL)), "10.0.0.4") == 0 )
-		printf ("PASS:    + long2ip (167772164UL -> 10.0.0.4)\n");
+	if ( strcmp ((rip = long2ip (lip)), ip) == 0 )
+		printf (
+			"PASS:    + long2ip (%lu -> %s)\n",
+			lip,
+			rip
+		);
 	else {
 		printf (
-			"FAIL:    + long2ip (167772164UL == 10.0.0.4, but result is %s)\n",
+			"FAIL:    + long2ip (%lu == %s, but result is %s)\n",
+			lip,
+			ip,
+			rip
+		);
+		ret = 1;
+	}
+
+	// thread safe api
+	if ( strcmp ((long2ip_r (lip, rip)), ip) == 0 )
+		printf (
+			"PASS:    + long2ip_r (%lu -> %s)\n",
+			lip,
+			rip
+		);
+	else {
+		printf (
+			"FAIL:    + long2ip (%lu == %s, but result is %s)\n",
+			lip,
+			ip,
 			rip
 		);
 		ret = 1;

@@ -4,7 +4,7 @@
 
 #
 AC_PREREQ(2.59)
-AC_INIT([libipcalc], [1.0.3], [http://oops.org])
+AC_INIT([libipcalc], [1.0.3], [https://github.com/Joungkyun/libipcalc])
 AC_CONFIG_AUX_DIR([tools])
 AM_INIT_AUTOMAKE([-Wall -Werror -Wno-override foreign no-dependencies])
 AM_MAINTAINER_MODE

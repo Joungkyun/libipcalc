@@ -20,7 +20,7 @@ AM_CLFAGS = -Wall
 AM_CPPFLAGS = -I$(top_srcdir)
 LDADD = $(top_srcdir)/libipcalc@COMPAT_VERSION@.la
 
-ctests = ip2long
+ctests = guess ip2long is_ipv4 network prefix_conv
 TESTS = $(ctests)
 check_PROGRAMS = $(ctests)
 TESTS_ENVIRONMENT = $(VALGRIND)
