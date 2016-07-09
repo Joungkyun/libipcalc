@@ -1,4 +1,4 @@
-libipcalc - IPv4 Calculating and subnetting C/C++ APIs
+IPv4 Calculating and subnetting C/C++ APIs
 ====
 
 ## License
