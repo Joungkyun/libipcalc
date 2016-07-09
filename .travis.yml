@@ -25,7 +25,7 @@ matrix:
           env: CFLAGS="-g -O2 -Wall"
 
 script:
-    - ./configure && make
+    - ./configure && make && make check
 
 notifications:
     email: false
