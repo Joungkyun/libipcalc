@@ -1,0 +1,56 @@
+.TH IS_IPV4 3 "09 Jul 2016"
+
+.SH NAME
+is_ipv4 \- validate IPv4 address or domain name.
+
+.SH SYNOPSIS
+.BI "#include <ipcalc.h>"
+.br
+.BI "short is_ipv4 (char * " address ", char * " err ");"
+
+.SH DESCRIPTION
+.BI is_ipv4
+api checks whether IPv4 address or domain name is valid or invalid.
+If 1st argument value is domain name, this value is converted IPv4 address.
+
+.SH "RETURN VALUE"
+.PP
+If given value is valid, returns 
+.BI "0",
+otherwise returns
+.BI "1".
+
+.SH EXAMPLE
+.nf
+#include <ipcalc.h>
+
+int main (void) {
+    //char addr[16] = "192.168.0.1";
+    char addr[16] = "oops.org";
+	char err[1024];
+    char ip[16] = { 0, };
+    ulong r;
+
+    strcpy (ip, addr);
+    if ( is_ipv4 (ip, err) ) {
+        fprintf (stderr, "%s -> %s\n", addr, err);
+        return 1;
+    }
+
+    printf ("IP address of %s is %s\n", addr, ip);
+
+    return 0;
+}
+.fi
+
+.SH AUTHORS
+JoungKyun.Kim <http://oops.org>
+
+.SH BUGS
+Report to https://github.com/Joungkyun/libipcalc/issues
+
+.SH COPYRIGHT
+Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
+
+This api is follows
+.BI LGPL 2.1
