@@ -1,10 +1,10 @@
 This work was packaged for Debian by:
 
-    JoungKyun Kim (OOPS Development) <admin@oops.org> on Mon, 10 Jan 2011 16:33:30 +0900
+    JoungKyun Kim <admin@oops.org> on Sat,  9 Jul 2016 22:08:04 +0900
 
 It was downloaded from:
 
-    <ftp://mirror.oops.org/pub/oops/libipcalc/>
+    <https://github.com/Joungkyun/libipcalc/releases>
 
 Upstream Author(s):
 
@@ -20,7 +20,7 @@ License:
 
 The Debian packaging is:
 
-    Copyright (C) 2016 JoungKyun Kim (OOPS Development) <admin@oops.org>
+    Copyright (C) 2016 JoungKyun Kim <admin@oops.org>
 
 This is licensed under the LGPL version 2.1,
 see "/usr/share/common-licenses/LGPL-2.1".

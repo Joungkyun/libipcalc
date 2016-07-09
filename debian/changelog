@@ -1,3 +1,14 @@
+libipcalc (1.0.3-1) stable; urgency=low
+  * support native window library and binaries with MinGW
+  * add Code::Block workspace (0316718)
+  * fixed #1 prefix2long integer overflow on 64bit machine (0fa2464)
+  * fixed #2 deprecated valid_ip_address api (00749f1)
+    -  use is_ipv4 api that is same prototype with valid_ip_address api.
+  * enhanced build test (8da352a)
+  * imporve man pages (ff0f29c)
+
+ -- JoungKyun Kim <admin@oops.org>  Sat,  9 Jul 2016 22:07:16 +0900
+
 libipcalc (1.0.2-1) stable; urgency=low
 
   * changed debian pkg name ipcalc-utils to libipcalc-utils
@@ -5,16 +16,16 @@ libipcalc (1.0.2-1) stable; urgency=low
   * enhanced ipcalc.m4
   * changed automake environments
 
- -- JoungKyun Kim (OOPS Development) <admin@oops.org>  Tue, 11 Feb 2014 03:09:25 +0900
+ -- JoungKyun Kim <admin@oops.org>  Tue, 11 Feb 2014 03:09:25 +0900
 
 libipcalc (1.0.1-1) stable; urgency=low
 
   * fixed build environments on other OS (ulong type, make command)
 
- -- JoungKyun Kim (OOPS Development) <admin@oops.org>  Mon, 4 Oct 2010 10:01:14 +0900
+ -- JoungKyun Kim <admin@oops.org>  Mon, 4 Oct 2010 10:01:14 +0900
 
 libipcalc (1.0.0-1) stable; urgency=low
 
   * Initial release
 
- -- JoungKyun Kim (OOPS Development) <admin@oops.org>  Mon, 8 Aug 2010 16:33:30 +0900
+ -- JoungKyun Kim <admin@oops.org>  Mon, 8 Aug 2010 16:33:30 +0900
