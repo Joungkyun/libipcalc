@@ -36,7 +36,7 @@ int main (void) {
 		);
 	} else {
 		printf (
-			"PASS:    + is_ipv4 (%s => must occur error. but no error!)\n",
+			"FAIL:    + is_ipv4 (%s => must occur error. but no error!)\n",
 			rip
 		);
 		ret = 1;

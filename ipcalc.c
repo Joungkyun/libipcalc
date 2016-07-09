@@ -48,7 +48,7 @@ IPCALC_API short is_ipv4 (char * addr, char * err) { // {{{
 
 	memset (err, 0, 1);
 	memset (&hints, 0, sizeof (hints));
-	hints.ai_family = AF_UNSPEC;
+	hints.ai_family = AF_INET; // only IPv4
 
 	if ( (stat = getaddrinfo (addr, NULL, &hints, &r)) != 0 ) {
 		strcpy (err, gai_strerror (stat));
