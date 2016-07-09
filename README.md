@@ -1,5 +1,6 @@
 IPv4 Calculating and subnetting C/C++ APIs
 ====
+[![Build Status](https://travis-ci.org/Joungkyun/libipcalc.svg?branch=master)](https://travis-ci.org/Joungkyun/libipcalc) [![GitHub license](https://img.shields.io/badge/license-LGPLv2-blue.svg)](https://raw.githubusercontent.com/Joungkyun/libipcalc/master/LICENSE)
 
 ## License
 
