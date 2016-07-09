@@ -42,7 +42,7 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 
 #docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
 if ! COMPAT
-dist_doc_DATA = Changes README LICENSE
+dist_doc_DATA = Changes README.md LICENSE
 endif
 
 m4dir = $(datadir)/aclocal
