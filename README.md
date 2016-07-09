@@ -40,3 +40,6 @@ For preinstall, use DESTDIR environment as follows:
 [root@host libipcalc-1.0.3]$ make install DESTDIR=/path
 ```
 
+## Usage
+
+See also [Wiki pages](https://github.com/Joungkyun/libipcalc/wiki) about C/C++ apis and utility commands.
