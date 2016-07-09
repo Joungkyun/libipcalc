@@ -39,7 +39,7 @@
 /*
  * check valid ip
  */
-IPCALC_API short valid_ip_address (char * addr, char * err) { // {{{
+IPCALC_API short is_ipv4 (char * addr, char * err) { // {{{
 	struct addrinfo hints, * r, * rp;
 	struct sockaddr_in *sin;
 	//struct sockaddr_in6 *sin6;
@@ -82,6 +82,13 @@ IPCALC_API short valid_ip_address (char * addr, char * err) { // {{{
 	freeaddrinfo (r);
 
 	return 1;
+} // }}}
+
+/*
+ * deprecated on 1.0.3. use is_ipv4 api
+ */
+IPCALC_API short valid_ip_address (char * addr, char * err) { // {{{
+	return is_ipv4 (addr, err);
 } // }}}
 
 /*

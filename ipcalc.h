@@ -29,6 +29,8 @@ extern "C" {
 /*
  * check valid ip
  */
+extern short is_ipv4 (char * addr, char * err);
+// deprecated on 1.0.3. use is_ipv4 api
 extern short valid_ip_address (char * addr, char * err);
 
 /*

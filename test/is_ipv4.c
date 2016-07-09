@@ -27,15 +27,16 @@ int main (void) {
 	int           ret = 0;
 
 	strcpy (rip, "256.0.0.1");
-	if ( valid_ip_address (rip, err) != 0 ) {
+	//if ( valid_ip_address (rip, err) != 0 ) {
+	if ( is_ipv4 (rip, err) != 0 ) {
 		printf (
-			"PASS:    + valid_ip_address (%s => %s)\n",
+			"PASS:    + is_ipv4 (%s => %s)\n",
 			rip,
 			err
 		);
 	} else {
 		printf (
-			"PASS:    + valid_ip_address (%s => must occur error. but no error!)\n",
+			"PASS:    + is_ipv4 (%s => must occur error. but no error!)\n",
 			rip
 		);
 		ret = 1;
