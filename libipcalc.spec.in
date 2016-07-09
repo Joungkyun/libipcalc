@@ -8,8 +8,8 @@ Release: 1
 Epoch: 1
 License: LGPL
 Group: System Environment/Libraries
-Source0: ftp://mirror.oops.org/pub/oops/%{name}/%{name}-%{version}.tar.bz2
-URL: http://oops.org
+Source0: https://github.com/Joungkyun/libipcalc/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+URL: https://github.com/Joungkyun/libipcalc
 Buildroot: /var/tmp/%{name}-%{version}-root
 
 %description
