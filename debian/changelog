@@ -1,3 +1,8 @@
+libipcalc (1.0.4-1) stable; urgency=low
+  * 
+
+ -- JoungKyun Kim <admin@oops.org>  Sat,  9 Jul 2016 22:16:41 +0900
+
 libipcalc (1.0.3-1) stable; urgency=low
   * support native window library and binaries with MinGW
   * add Code::Block workspace (0316718)
