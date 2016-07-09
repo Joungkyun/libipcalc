@@ -57,7 +57,7 @@ and subnetting IP address.
 
 %files
 %defattr(0755,root,root)
-%doc Changes LICENSE README
+%doc Changes LICENSE README.md
 %{_libdir}/*.so.*
 
 %files devel

@@ -57,7 +57,7 @@ build_triplet = @build@
 host_triplet = @host@
 @COMPAT_TRUE@am__append_1 = m4/ipcalc@COMPAT_VERSION@.m4
 subdir = .
-DIST_COMMON = README $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
+DIST_COMMON = $(am__configure_deps) $(am__dist_doc_DATA_DIST) \
 	$(dist_m4_DATA) $(include_HEADERS) $(noinst_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/ipcalc-config.h.in $(srcdir)/libipcalc.spec.in \
@@ -129,7 +129,7 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-pdf-recursive install-ps-recursive install-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
-am__dist_doc_DATA_DIST = Changes README LICENSE
+am__dist_doc_DATA_DIST = Changes README.md LICENSE
 DATA = $(dist_doc_DATA) $(dist_m4_DATA)
 HEADERS = $(include_HEADERS) $(noinst_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
@@ -303,6 +303,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
 DISTCLEANFILES = $(am__append_1) *.bz2
 EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
@@ -325,7 +326,7 @@ EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
 
 
 #docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
-@COMPAT_FALSE@dist_doc_DATA = Changes README LICENSE
+@COMPAT_FALSE@dist_doc_DATA = Changes README.md LICENSE
 m4dir = $(datadir)/aclocal
 dist_m4_DATA = m4/ipcalc@COMPAT_VERSION@.m4
 @COMPAT_TRUE@BUILT_SOURCE = m4/ipcalc@COMPAT_VERSION@.m4
