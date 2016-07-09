@@ -61,8 +61,8 @@
 	#endif
 #endif
 
-#define IPCALC_VERSION "1.0.4"
-#define IPCALC_UVERSION "001000004"
+#define IPCALC_VERSION "1.0.3"
+#define IPCALC_UVERSION "001000003"
 
 #ifdef UINT_MAX
 	#undef UINT_MAX
