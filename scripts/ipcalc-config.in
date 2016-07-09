@@ -1,5 +1,4 @@
 #!/bin/bash
-# $Id$
 
 prog="libipcalc@COMPAT_VERSION@"
 prefix="@prefix@"

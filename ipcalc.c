@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 JoungKyun.Kim <http://oops.org/>
+ *  Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
  *
  *  This file is part of libipcalc.
  *
@@ -15,8 +15,6 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $Id$
  */
 
 /**
@@ -28,7 +26,7 @@
  * @author	JoungKyun.Kim <http://oops.org>
  * $Date$
  * $Revision$
- * @attention   Copyright (c) 2011 JoungKyun.Kim all rights reserved.
+ * @attention   Copyright (c) 2016 JoungKyun.Kim all rights reserved.
  */
 
 #ifdef HAVE_CONFIG_H

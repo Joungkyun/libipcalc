@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# $Id$
-
 if ! COMPAT
 EXTRA_DIST = ko/broadcast.3 ko/guess_netmask.3 ko/ip2long.3 \
 		   ko/long2ip.3 ko/long2prefix.3 ko/network.3 \

@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2011 JoungKyun.Kim <http://oops.org>
+# Copyright (c) 2016 JoungKyun.Kim <http://oops.org>
 #
 # This file is part of libipcalc
 #
@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# $Id$
 
 AM_CLFAGS = -Wall
 AM_CPPFLAGS = -I$(top_srcdir)

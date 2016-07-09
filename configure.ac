@@ -1,7 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 # Configure template for ipcalc library
 #
-# $Id$
 
 #
 AC_PREREQ(2.59)
