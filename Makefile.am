@@ -21,7 +21,6 @@ ACLOCAL_AMFLAGS = -I m4
 DISTCLEANFILES =
 
 EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
-			debian/patches/01-remove-rpath.patch \
 			debian/control \
 			debian/compat \
 			debian/libipcalc-dev.install \

@@ -421,7 +421,6 @@ AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
 DISTCLEANFILES = $(am__append_1) *.bz2
 EXTRA_DIST = Changes LICENSE debbuild-sh libipcalc.spec \
-			debian/patches/01-remove-rpath.patch \
 			debian/control \
 			debian/compat \
 			debian/libipcalc-dev.install \
